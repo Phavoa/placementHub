@@ -1,0 +1,701 @@
+import React, { useState } from "react";
+import {
+  Briefcase,
+  Monitor,
+  Megaphone,
+  Globe,
+  GraduationCap,
+  ChevronDown,
+  ChevronUp,
+  ArrowRight,
+  MessageSquare,
+} from "lucide-react";
+import Navbar from "./Navbar";
+import SmilingMan from "../assets/manSmiling.png";
+import Hubtel from "../assets/hubtel.png";
+import Mail from "../assets/emailIcon.png";
+import { FiCheckSquare } from "react-icons/fi";
+const RemoteInternship = () => {
+  // --- Data ---
+
+  const faqs = [
+    {
+      question: "What is placement?",
+      answer:
+        "Placement refers to the process of matching qualified candidates to job roles within an organization.",
+    },
+    {
+      question: "Who can apply for placements?",
+      answer:
+        "Placement Hub is open to HND and BSc graduates, as well as individuals with relevant skills and at least one year of experience. We also consider candidates with strong communication, interpersonal, and teamwork skills.",
+    },
+    {
+      question: "What types of placements does Placement Hub offer?",
+      answer:
+        "We provide internship placements, full-time roles, part-time positions, contract/temporary assignments, and graduate/entry-level placements, depending on the organization’s requirements and candidate profile.",
+    },
+    {
+      question: "Why choose Placement Hub’s placement internship program?",
+      answer:
+        "Our placement internship program prepares you with practical skills, personalized guidance, and meaningful work experience, giving you the confidence and tools to excel in your career.",
+    },
+    {
+      question: "How do I apply for a placement?",
+      answer:
+        "You can apply online through our platform. The process typically involves submitting an application, paying a small application fee, scheduling an interview, and completing any pre-placement assessments or training.",
+    },
+    {
+      question: "How does Placement Hub match candidates to organizations?",
+      answer:
+        "We carefully review candidates’ skills, experience, and career goals, then match them to organizations’ specific needs. Our goal is to ensure a mutually beneficial fit for both parties.",
+    },
+    {
+      question: "Can organizations request specific skills or qualifications?",
+      answer:
+        "Absolutely. Placement Hub tailors candidate recommendations based on the organization’s requirements, ensuring that every placement aligns with the needed skill set.",
+    },
+    {
+      question: "What benefits do candidates get from Placement Hub?",
+      answer:
+        "Candidates gain meaningful work experience, professional references, skill development, and access to roles that align with their career goals.",
+    },
+    {
+      question: "How long does the placement process take?",
+      answer:
+        "The duration varies depending on the organization and type of placement, but our structured process is designed to minimize waiting time and ensure candidates start their roles efficiently.",
+    },
+  ];
+
+  const [openFaq, setOpenFaq] = useState(null);
+
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  return (
+    <div className="font-['Outfit'] bg-white text-gray-900 overflow-x-hidden">
+      {/* --- HERO SECTION --- */}
+      <section className="relative bg-[#f8f7fa] overflow-hidden">
+        {/* Background Decoration */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/4"></div>
+
+        {/* Navbar Placeholder */}
+        <Navbar />
+
+        <div className="bg-[#EFECF4] grid lg:grid-cols-2 gap-12 items-center relative z-10  mx-auto w-full ">
+          <div className="pl-4 md:pl-12 lg:pl-20 pt-12 pb-20">
+            <div className="space-y-8 animate-fade-in-up">
+              <h1 className="text-2xl md:text-6xl lg:text-5xl font-bold text-[#2d1b4e] leading-[1.1]">
+                Get Placed. Get Prepared. <br />
+                Build Your Career.
+              </h1>
+              <p className="text-gray-600 text-lg md:text-xl max-w-lg leading-relaxed">
+                We help you find the best remote internships with top companies
+                to kickstart your career. Gain experience, network, and grow.
+              </p>
+              <button className="bg-[#2d1b4e] text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-purple-900 transition-all shadow-xl hover:shadow-2xl  hover:-translate-y-1">
+                Apply Now
+              </button>
+            </div>
+          </div>
+
+          <div className="relative mt-12 lg:mt-0 flex-1">
+            {/* Hero Image Container */}
+            <div className="relative z-10 flex justify-center">
+              <div className="relative">
+                <img
+                  src={SmilingMan}
+                  alt="Happy professional"
+                  className="object-contain w-full h-full md:w-full md:h-full z-10 relative"
+                />
+
+                {/* Floating Cards */}
+                <div className="absolute top-10 -left-4 md:left-0 bg-[#EBF0F3] backdrop-blur-sm p-3 rounded-2xl shadow flex flex-col items-center gap-3 animate-bounce-slow border border-gray-100 z-20 w-[260px]">
+                  <div className="w-full flex items-center justify-between gap-2">
+                    <div>
+                      <img src={Hubtel} alt="Hubtel" className="h-4 mb-0.5" />
+                      <p className="text-sm text-gray-00">Kokomlemle</p>
+                    </div>
+                    <p className="text-sm text-[#3E1D67] font-bold px-2 py-0.5 bg-white rounded-md">
+                      Full Time
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-[#3E1D67] font-bold">
+                      Graphic Designer
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      The company seeks to employ the services of
+                      a.....................
+                      <span className="text-[#3E1D67] font-bold">
+                        Read More
+                      </span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Company Logos Floating */}
+                <div className="absolute bottom-10 left-0 md:-left-10  bg-[#EBF0F3] backdrop-blur-sm p-3 rounded-2xl shadow flex flex-col animate-bounce-slow border border-gray-100 z-20 w-[240px]">
+                  <div className="w-full flex items-center justify-between gap-2">
+                    <div className="flex w-full  justify-between items-center gap-2">
+                      <div className="flex items-center gap-4">
+                        <img src={Mail} alt="Hubtel" className="h-4 mb-0.5" />
+                        <p className="text-sm text-gray-00">Congratulations</p>
+                      </div>
+
+                      <FiCheckSquare />
+                    </div>
+                  </div>
+                  <p className="text-sm">You have got an Email</p>
+                </div>
+
+                <div className="absolute -bottom-10 right-8 -translate-y-1/2 bg-[#F1F5F9] backdrop-blur-md p-4 rounded-3xl shadow-xl flex flex-col items-center animatebounce-slow border border-white/50 z-20">
+                  <div className="text-center">
+                    <h3 className="font-bold text-lg text-gray-900">200+</h3>
+                    <p className="text-gray-600 text-sm font-medium mt-1">
+                      Got job on our platform
+                    </p>
+                  </div>
+
+                  <div className="flex justify-center items-center -space-x-3 mt-2">
+                    {[32, 12, 23, 14, 5].map((i, index) => (
+                      <img
+                        key={index}
+                        src={`https://i.pravatar.cc/100?img=${i}`}
+                        alt="User"
+                        className="w-8 h-8 rounded-full border-2 border-white object-cover"
+                      />
+                    ))}
+                    <div className="w-10 h-10 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center text-gray-600 font-bold shadow-sm text-lg z-10">
+                      +
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Pattern Overlay */}
+            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- HOW TO START --- */}
+      <section className="bg-[#2d1b4e] py-24 text-white text-center relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-20">
+            Here's How You Start
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12 text-center">
+            {/* Step 1 */}
+            <div className="relative flex flex-col items-center">
+              <span className="text-[12rem] font-bold text-white/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none select-none">
+                1
+              </span>
+              <div className="relative z-10 pt-12">
+                <h3 className="text-2xl font-bold mb-2">Apply</h3>
+                <p className="text-[#ffc12b] font-bold text-sm mb-4 uppercase tracking-wide">
+                  Only 5 minutes
+                </p>
+                <p className="text-white/80 max-w-xs mx-auto leading-relaxed">
+                  Apply online to begin your placement journey
+                </p>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="relative flex flex-col items-center">
+              <span className="text-[12rem] font-bold text-white/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none select-none">
+                2
+              </span>
+              <div className="relative z-10 pt-12">
+                <h3 className="text-2xl font-bold mb-2">Secure Your Spot</h3>
+                <p className="text-[#ffc12b] font-bold text-sm mb-4 uppercase tracking-wide">
+                  Quick and easy
+                </p>
+                <p className="text-white/80 max-w-xs mx-auto leading-relaxed">
+                  Complete your registration by paying the ₦10,000 application
+                  fee and begin your placement journey.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="relative flex flex-col items-center">
+              <span className="text-[12rem] font-bold text-white/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none select-none">
+                3
+              </span>
+              <div className="relative z-10 pt-12">
+                <h3 className="text-2xl font-bold mb-2">
+                  Schedule Your Interview
+                </h3>
+                <p className="text-[#ffc12b] font-bold text-sm mb-4 uppercase tracking-wide">
+                  Let's get to know you
+                </p>
+                <p className="text-white/80 max-w-xs mx-auto leading-relaxed">
+                  Set up a quick interview with our team to explore placement
+                  opportunities tailored to you.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <button className="mt-20 bg-[#ffc12b] text-[#2d1b4e] px-12 py-4 rounded-xl font-bold text-lg hover:bg-[#ffcd57] transition-all hover:scale-105 shadow-lg">
+            Get started
+          </button>
+        </div>
+      </section>
+
+      {/* --- CHOOSE YOUR PATH --- */}
+      <section className="py-24 px-4 bg-[#F9FAFB]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="bg-[#E0DAED] text-[#2d1b4e] px-6 py-2 rounded-lg text-sm font-bold tracking-wide uppercase inline-block mb-6">
+              CAREER FIELDS
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Choose Your Path
+            </h2>
+            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+              Can't find your niche? Reach out, we're always creating new
+              opportunities for job seekers like you.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                "Software Developer",
+                "Cybersecurity Specialist",
+                "Data Analyst",
+                "Digital Marketing Expert",
+                "Accountant",
+                "Project Manager",
+                "Sales Executive",
+                "Software Developer",
+                "Data Analyst",
+                "Teachers",
+                "Business Development Manager",
+                "Customer Service Representative",
+                "Human Resources Officer",
+                "Executive / Administrative Assistant",
+                "UX/UI Designer",
+                "Warehouse / Supply Chain Coordinator",
+                "Pharmacist / Pharmacy Assistant",
+                "Content Writer",
+              ].map((role, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex items-center gap-4 group cursor-pointer"
+                >
+                  <div className="bg-[#F3F0F9] p-3 rounded-lg text-[#2d1b4e] group-hover:bg-[#2d1b4e] group-hover:text-white transition-colors">
+                    <Briefcase className="w-6 h-6" />
+                  </div>
+                  <span className="font-bold text-gray-800 text-lg">
+                    {role}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-col md:flex-row justify-center gap-6">
+              {["Cybersecurity Expert", "IT Specialist"].map((role, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex items-center gap-4 group cursor-pointer w-full md:w-auto md:min-w-[350px]"
+                >
+                  <div className="bg-[#F3F0F9] p-3 rounded-lg text-[#2d1b4e] group-hover:bg-[#2d1b4e] group-hover:text-white transition-colors">
+                    <Briefcase className="w-6 h-6" />
+                  </div>
+                  <span className="font-bold text-gray-800 text-lg">
+                    {role}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- PARTNERSHIPS --- */}
+      <section className="bg-[#2d1b4e] py-24 px-4 text-center text-white">
+        <div className="max-w-4xl mx-auto space-y-12">
+          {/* Top Block */}
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Partnerships
+            </h2>
+            <p className="text-white/80 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+              We are open to partnerships with employers.
+              <br className="hidden md:block" /> Join our network of employers
+              to access our talent pool
+            </p>
+          </div>
+
+          {/* Bottom Block */}
+          <div>
+            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+              Begin Your Journey, Shape Your Future
+            </h3>
+            <p className="text-white/80 text-lg leading-relaxed max-w-3xl mx-auto mb-10">
+              Be the first to grab your spot in the fast lane and watch your
+              career take off with an impactful placement.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <button className="bg-[#FFC12B] text-[#2d1b4e] font-bold px-8 py-3 rounded-xl hover:bg-[#ffcd57] transition-all w-full sm:w-auto min-w-[160px]">
+                Apply now
+              </button>
+              <button className="bg-transparent border border-[#FFC12B] text-[#FFC12B] font-bold px-8 py-3 rounded-xl hover:bg-[#FFC12B]/10 transition-all w-full sm:w-auto min-w-[160px]">
+                Book a Call
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- ELIGIBILITY --- */}
+      {/* --- ELIGIBILITY --- */}
+      <section className="bg-[#FFB4000D] py-24 px-4 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-20 text-[#1f1f1f]">
+          Who Is Eligible To Apply
+        </h2>
+
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 md:gap-32 mb-20 relative">
+          {/* Item 1 */}
+          <div className="flex flex-col items-center">
+            <GraduationCap className="w-12 h-12 text-[#ffc12b] mb-6" />
+            <h3 className="font-bold text-2xl mb-4 text-[#4c3b71]">
+              Graduates
+            </h3>
+            <p className="text-gray-500 max-w-sm text-lg leading-relaxed">
+              Graduates (HND or BSc) with at least one year of relevant work
+              experience
+            </p>
+          </div>
+
+          {/* Item 2 */}
+          <div className="flex flex-col items-center">
+            <MessageSquare className="w-12 h-12 text-[#ffc12b] mb-6" />
+            <h3 className="font-bold text-2xl mb-4 text-[#4c3b71]">
+              Interpersonal Skills
+            </h3>
+            <p className="text-gray-500 max-w-sm text-lg leading-relaxed">
+              Confident communicators with interpersonal skills that make
+              collaboration effortless
+            </p>
+          </div>
+        </div>
+
+        <div className="max-w-5xl mx-auto bg-[#FFB4001A] p-8 md:p-12 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-8 border border-[#FFB4001A]">
+          <div className="text-left">
+            <h4 className="font-bold text-2xl text-[#4c3b71] mb-2">
+              Not sure if you qualify?
+            </h4>
+            <p className="text-gray-600 font-medium text-lg">
+              Contact our admissions team and we'll help you determine the best
+              program for your situation.
+            </p>
+          </div>
+          <button className="bg-[#ffc12b] text-[#2d1b4e] px-10 py-4 rounded-xl font-bold hover:bg-yellow-400 transition-colors shadow-md whitespace-nowrap text-lg">
+            Get started
+          </button>
+        </div>
+      </section>
+
+      {/* --- PROGRAM FEATURES & FEE --- */}
+      <section className="bg-white py-24 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[#1f1f1f]">
+              Internships Placement Program Fee
+            </h2>
+            <p className="text-gray-500 text-lg">
+              Unlock full access to our placement program, including all
+              resources.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Card 1 */}
+            <div className="bg-[#F9FAFB] p-10 rounded-[2rem] flex flex-col items-start text-left">
+              <h3 className="font-bold text-2xl mb-6 text-[#2d1b4e]">
+                Program Benefits
+              </h3>
+              <ul className="space-y-3 text-gray-600 font-medium mb-8">
+                {[
+                  "Career Support & Coaching",
+                  "1-on-1 Career Guidance",
+                  "Interview Prep",
+                  "Job Readiness Training",
+                  "Tailored Application Advice",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <button className="flex items-center gap-2 text-[#2d1b4e] font-bold mt-auto hover:gap-3 transition-all">
+                Partner with us <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-[#F9FAFB] p-10 rounded-[2rem] flex flex-col items-start text-left">
+              <h3 className="font-bold text-2xl mb-6 text-[#2d1b4e]">
+                Placement Experience
+              </h3>
+              <ul className="space-y-3 text-gray-600 font-medium mb-8">
+                {[
+                  "Hands-on Project Work",
+                  "Career Readiness",
+                  "Tailored Placement",
+                  "Guidance and Support",
+                  "Smooth Transition to Employment",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <button className="flex items-center gap-2 text-[#2d1b4e] font-bold mt-auto hover:gap-3 transition-all">
+                Partner with us <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-[#F9FAFB] p-10 rounded-[2rem] flex flex-col items-start text-left">
+              <h3 className="font-bold text-2xl mb-6 text-[#2d1b4e]">
+                Career Resources & Support
+              </h3>
+              <ul className="space-y-3 text-gray-600 font-medium mb-8">
+                {[
+                  "Career Advisor",
+                  "Tailored CV",
+                  "Cross-Cultural Skills",
+                  "Professional Reference",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <button className="flex items-center gap-2 text-[#2d1b4e] font-bold mt-auto hover:gap-3 transition-all">
+                Partner with us <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Card 4 - Pricing */}
+            <div className="bg-[#2d1b4e] p-10 rounded-[2rem] flex flex-col items-center justify-center text-center relative overflow-hidden">
+              <h3 className="font-bold text-2xl text-white mb-2">
+                Join the program
+              </h3>
+              <div className="text-6xl font-bold text-white mb-2">N10,000</div>
+              <p className="text-[#ffc12b] font-bold uppercase tracking-wide text-sm mb-8">
+                Total Payment
+              </p>
+              <button className="bg-[#ffc12b] text-[#2d1b4e] px-10 py-3 rounded-lg font-bold hover:bg-[#ffcd57] transition-all shadow-lg w-full max-w-xs">
+                Apply Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- FAQ --- */}
+      <section className="bg-[#f9fafb] py-24 px-4">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-start">
+          <div className="lg:col-span-4 sticky top-24">
+            <h2 className="text-4xl font-bold mb-4 text-[#1f1f1f]">FAQs</h2>
+            <p className="text-gray-500 text-lg leading-relaxed">
+              Got questions about joining our placement program? Check here for
+              answers.
+            </p>
+          </div>
+
+          <div className="lg:col-span-8 space-y-4">
+            {faqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-md border border-gray-100"
+              >
+                <button
+                  className="w-full flex justify-between items-start text-left p-6 sm:p-8"
+                  onClick={() => toggleFaq(idx)}
+                >
+                  <span className="font-bold text-[#2d1b4e] text-lg md:text-xl pr-8">
+                    {faq.question}
+                  </span>
+                  {openFaq === idx ? (
+                    <ChevronUp className="w-6 h-6 text-[#2d1b4e] flex-shrink-0 mt-1" />
+                  ) : (
+                    <ChevronDown className="w-6 h-6 text-gray-400 flex-shrink-0 mt-1" />
+                  )}
+                </button>
+                <div
+                  className={`transition-all duration-300 ease-in-out ${
+                    openFaq === idx
+                      ? "max-h-96 opacity-100"
+                      : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="px-6 sm:px-8 pb-8 text-gray-600 leading-relaxed pt-0">
+                    {faq.answer}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- BOTTOM CTA --- */}
+      <section className="px-4 pb-24">
+        <div className="max-w-7xl mx-auto bg-[#2d1b4e] rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden text-white shadow-2xl">
+          <div className="relative z-10">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              Start The Journey <br /> That Starts Everything!
+            </h2>
+            <p className="text-white/70 max-w-xl mx-auto mb-10 text-lg">
+              Join thousands of students who have launched their careers with
+              our remote internship program.
+            </p>
+            <button className="bg-[#ffc12b] text-[#2d1b4e] px-12 py-5 rounded-full font-bold text-xl hover:bg-yellow-400 shadow-xl transition-transform hover:scale-105">
+              Join now
+            </button>
+          </div>
+          {/* Shapes */}
+          <div className="absolute top-0 left-0 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-[100px] opacity-40"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-pink-600 rounded-full mix-blend-multiply filter blur-[100px] opacity-40"></div>
+        </div>
+      </section>
+
+      {/* --- FOOTER --- */}
+      <footer className="bg-[#f0f4f8] pt-24 pb-12 px-4 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-20">
+          <div className="col-span-1 md:col-span-1">
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-8 h-8 bg-[#2d1b4e] rounded-md flex items-center justify-center text-white font-bold">
+                P
+              </div>
+              <span className="text-xl font-bold text-[#2d1b4e]">
+                Placement Plus
+              </span>
+            </div>
+            <p className="text-sm text-gray-600 mb-8 max-w-xs leading-relaxed">
+              Placement Plus is your gateway to global career opportunities. We
+              connect talent with top companies worldwide.
+            </p>
+            <div className="flex gap-4">
+              <div className="w-10 h-10 bg-blue-600 rounded-full text-white flex items-center justify-center hover:bg-blue-700 cursor-pointer transition-colors shadow-sm">
+                <Globe className="w-5 h-5" />
+              </div>
+              <div className="w-10 h-10 bg-sky-500 rounded-full text-white flex items-center justify-center hover:bg-sky-600 cursor-pointer transition-colors shadow-sm">
+                <Monitor className="w-5 h-5" />
+              </div>
+              <div className="w-10 h-10 bg-blue-800 rounded-full text-white flex items-center justify-center hover:bg-blue-900 cursor-pointer transition-colors shadow-sm">
+                <Briefcase className="w-5 h-5" />
+              </div>
+              <div className="w-10 h-10 bg-pink-600 rounded-full text-white flex items-center justify-center hover:bg-pink-700 cursor-pointer transition-colors shadow-sm">
+                <Megaphone className="w-5 h-5" />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-[#2d1b4e] mb-6 text-lg">Company</h4>
+            <ul className="space-y-4 text-gray-600">
+              <li>
+                <a href="#" className="hover:text-[#2d1b4e]">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#2d1b4e]">
+                  Careers
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#2d1b4e]">
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#2d1b4e]">
+                  Pricing
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-[#2d1b4e] mb-6 text-lg">Resources</h4>
+            <ul className="space-y-4 text-gray-600">
+              <li>
+                <a href="#" className="hover:text-[#2d1b4e]">
+                  Templates
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#2d1b4e]">
+                  Tutorials
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#2d1b4e]">
+                  Free Resources
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#2d1b4e]">
+                  Contract Templates
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-[#2d1b4e] mb-6 text-lg">Legal</h4>
+            <ul className="space-y-4 text-gray-600">
+              <li>
+                <a href="#" className="hover:text-[#2d1b4e]">
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#2d1b4e]">
+                  Terms of Service
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#2d1b4e]">
+                  Cookie Policy
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#2d1b4e]">
+                  GDPR
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto pt-8 border-t border-gray-300 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 gap-4">
+          <p>© 2026 Placement Plus. All rights reserved.</p>
+          <button className="flex items-center gap-2 hover:text-[#2d1b4e]">
+            Follow Us
+          </button>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default RemoteInternship;
