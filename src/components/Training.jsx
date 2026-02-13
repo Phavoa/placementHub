@@ -7,7 +7,7 @@ import Subscribe from "./Subscribe";
 import Footer from "./Footer";
 import Cards from "./Cards";
 
-function Home() {
+function Training() {
   return (
     <div className="App">
       <Navbar />
@@ -22,4 +22,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Training;
