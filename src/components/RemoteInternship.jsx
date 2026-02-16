@@ -64,6 +64,16 @@ const RemoteInternship = () => {
       answer:
         "The duration varies depending on the organization and type of placement, but our structured process is designed to minimize waiting time and ensure candidates start their roles efficiently.",
     },
+    {
+      question: "Is the placement fee refundable?",
+      answer:
+        "Yes, the placement fee is fully refunded if a candidate is not successfully placed.",
+    },
+    {
+      question: "Is the registration fee refundable?",
+      answer:
+        "No, the registration fee is non-refundable as it confirms your enrollment and secures your access to our services.",
+    },
   ];
 
   const [openFaq, setOpenFaq] = useState(null);
@@ -189,41 +199,44 @@ const RemoteInternship = () => {
             Here's How You Start
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12 text-center">
+          <div className="grid md:grid-cols-4 gap-8 md:gap-12 text-center">
             {/* Step 1 */}
             <div className="relative flex flex-col items-center">
               <span className="text-[12rem] font-bold text-white/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none select-none">
                 1
               </span>
               <div className="relative z-10 pt-12">
-                <h3 className="text-2xl font-bold mb-2">Apply</h3>
+                <h3 className="text-2xl font-bold mb-2">
+                  Select Preferred Field
+                </h3>
                 <p className="text-[#ffc12b] font-bold text-sm mb-4 uppercase tracking-wide">
                   Only 5 minutes
                 </p>
                 <p className="text-white/80 max-w-xs mx-auto leading-relaxed">
-                  Apply online to begin your placement journey
+                  Go through the available internship options below and select
+                  your preferred field.
                 </p>
               </div>
             </div>
 
-            {/* Step 2 */}
             <div className="relative flex flex-col items-center">
               <span className="text-[12rem] font-bold text-white/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none select-none">
                 2
               </span>
               <div className="relative z-10 pt-12">
-                <h3 className="text-2xl font-bold mb-2">Secure Your Spot</h3>
+                <h3 className="text-2xl font-bold mb-2">Registration Fee</h3>
                 <p className="text-[#ffc12b] font-bold text-sm mb-4 uppercase tracking-wide">
                   Quick and easy
                 </p>
                 <p className="text-white/80 max-w-xs mx-auto leading-relaxed">
-                  Complete your registration by paying the ₦10,000 application
-                  fee and begin your placement journey.
+                  Registration requires a one-time payment to confirm your
+                  enrollment and give you access to our services and
+                  opportunities
                 </p>
               </div>
             </div>
 
-            {/* Step 3 */}
+            {/* Step 2 */}
             <div className="relative flex flex-col items-center">
               <span className="text-[12rem] font-bold text-white/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none select-none">
                 3
@@ -233,11 +246,28 @@ const RemoteInternship = () => {
                   Schedule Your Interview
                 </h3>
                 <p className="text-[#ffc12b] font-bold text-sm mb-4 uppercase tracking-wide">
-                  Let's get to know you
+                  Let’s get to know you
                 </p>
                 <p className="text-white/80 max-w-xs mx-auto leading-relaxed">
                   Set up a quick interview with our team to explore placement
                   opportunities tailored to you.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="relative flex flex-col items-center">
+              <span className="text-[12rem] font-bold text-white/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none select-none">
+                4
+              </span>
+              <div className="relative z-10 pt-12">
+                <h3 className="text-2xl font-bold mb-2">Placement Fee</h3>
+                <p className="text-[#ffc12b] font-bold text-sm mb-4 uppercase tracking-wide">
+                  Get started
+                </p>
+                <p className="text-white/80 max-w-xs mx-auto leading-relaxed">
+                  The placement fee covers the recruitment process, and it’s
+                  fully refundable if a candidate is not successfully placed
                 </p>
               </div>
             </div>
@@ -268,24 +298,15 @@ const RemoteInternship = () => {
           <div className="space-y-6">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                "Software Developer",
-                "Cybersecurity Specialist",
-                "Data Analyst",
-                "Digital Marketing Expert",
-                "Accountant",
-                "Project Manager",
-                "Sales Executive",
-                "Software Developer",
-                "Data Analyst",
-                "Teachers",
-                "Business Development Manager",
-                "Customer Service Representative",
-                "Human Resources Officer",
-                "Executive / Administrative Assistant",
-                "UX/UI Designer",
-                "Warehouse / Supply Chain Coordinator",
-                "Pharmacist / Pharmacy Assistant",
-                "Content Writer",
+                "IT Internships",
+                "HR Internship",
+                "Accounting Internship",
+                "Project Assistant",
+                "Sales Internship",
+                "Admin Assistant",
+                "Technical Assistant",
+                "Customer Care Internship",
+                "Data Entry Internship",
               ].map((role, idx) => (
                 <div
                   key={idx}
@@ -302,19 +323,21 @@ const RemoteInternship = () => {
             </div>
 
             <div className="flex flex-col md:flex-row justify-center gap-6">
-              {["Cybersecurity Expert", "IT Specialist"].map((role, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex items-center gap-4 group cursor-pointer w-full md:w-auto md:min-w-[350px]"
-                >
-                  <div className="bg-[#F3F0F9] p-3 rounded-lg text-[#2d1b4e] group-hover:bg-[#2d1b4e] group-hover:text-white transition-colors">
-                    <Briefcase className="w-6 h-6" />
+              {["Digital Marketing Internship", "Pharmacy Assistant"].map(
+                (role, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex items-center gap-4 group cursor-pointer w-full md:w-auto md:min-w-[350px]"
+                  >
+                    <div className="bg-[#F3F0F9] p-3 rounded-lg text-[#2d1b4e] group-hover:bg-[#2d1b4e] group-hover:text-white transition-colors">
+                      <Briefcase className="w-6 h-6" />
+                    </div>
+                    <span className="font-bold text-gray-800 text-lg">
+                      {role}
+                    </span>
                   </div>
-                  <span className="font-bold text-gray-800 text-lg">
-                    {role}
-                  </span>
-                </div>
-              ))}
+                ),
+              )}
             </div>
           </div>
         </div>
@@ -428,7 +451,6 @@ const RemoteInternship = () => {
               <ul className="space-y-3 text-gray-600 font-medium mb-8">
                 {[
                   "Career Support & Coaching",
-                  "1-on-1 Career Guidance",
                   "Interview Prep",
                   "Job Readiness Training",
                   "Tailored Application Advice",
@@ -476,7 +498,6 @@ const RemoteInternship = () => {
               <ul className="space-y-3 text-gray-600 font-medium mb-8">
                 {[
                   "Career Advisor",
-                  "Tailored CV",
                   "Cross-Cultural Skills",
                   "Professional Reference",
                 ].map((item, i) => (
@@ -492,15 +513,12 @@ const RemoteInternship = () => {
             </div>
 
             {/* Card 4 - Pricing */}
-            <div className="bg-[#2d1b4e] p-10 rounded-[2rem] flex flex-col items-center justify-center text-center relative overflow-hidden">
-              <h3 className="font-bold text-2xl text-white mb-2">
+            <div className="bg-[#2d1b4e] p-10 rounded-[2rem] flex items-center justify-center gap-10 text-center relative overflow-hidden">
+              <h3 className="font-bold text-2xl text-white mb-2 whitespace-nowrap">
                 Join the program
               </h3>
-              <div className="text-6xl font-bold text-white mb-2">N10,000</div>
-              <p className="text-[#ffc12b] font-bold uppercase tracking-wide text-sm mb-8">
-                Total Payment
-              </p>
-              <button className="bg-[#ffc12b] text-[#2d1b4e] px-10 py-3 rounded-lg font-bold hover:bg-[#ffcd57] transition-all shadow-lg w-full max-w-xs">
+
+              <button className="bg-[#ffc12b] text-[#2d1b4e] px-10 py-3 rounded-lg font-bold hover:bg-[#ffcd57] transition-all shadow-lg">
                 Apply Now
               </button>
             </div>
@@ -558,14 +576,11 @@ const RemoteInternship = () => {
       {/* --- BOTTOM CTA --- */}
       <section className="px-4 pb-24">
         <div className="max-w-7xl mx-auto bg-[#2d1b4e] rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden text-white shadow-2xl">
-          <div className="relative z-10">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          <div className="relative z-10 flex justify-between items-center">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-left  ">
               Start The Journey <br /> That Starts Everything!
             </h2>
-            <p className="text-white/70 max-w-xl mx-auto mb-10 text-lg">
-              Join thousands of students who have launched their careers with
-              our remote internship program.
-            </p>
+
             <button className="bg-[#ffc12b] text-[#2d1b4e] px-12 py-5 rounded-full font-bold text-xl hover:bg-yellow-400 shadow-xl transition-transform hover:scale-105">
               Join now
             </button>
@@ -580,14 +595,6 @@ const RemoteInternship = () => {
       <footer className="bg-[#f0f4f8] pt-24 pb-12 px-4 border-t border-gray-200">
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-20">
           <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 bg-[#2d1b4e] rounded-md flex items-center justify-center text-white font-bold">
-                P
-              </div>
-              <span className="text-xl font-bold text-[#2d1b4e]">
-                Placement Plus
-              </span>
-            </div>
             <p className="text-sm text-gray-600 mb-8 max-w-xs leading-relaxed">
               Placement Plus is your gateway to global career opportunities. We
               connect talent with top companies worldwide.
