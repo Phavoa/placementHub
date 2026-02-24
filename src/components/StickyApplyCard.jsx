@@ -53,17 +53,19 @@ const StickyApplyCard = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-            <div className="w-10 h-10 rounded-full bg-[#f0f4f8] flex items-center justify-center text-[#2d1b4e]">
-              <DollarSign className="w-5 h-5" />
+          {job.type !== "Internship" && (
+            <div className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+              <div className="w-10 h-10 rounded-full bg-[#f0f4f8] flex items-center justify-center text-[#2d1b4e]">
+                <DollarSign className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">
+                  Salary
+                </p>
+                <p className="font-semibold text-gray-800">{job.salary}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">
-                Salary
-              </p>
-              <p className="font-semibold text-gray-800">{job.salary}</p>
-            </div>
-          </div>
+          )}
 
           <div className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors">
             <div className="w-10 h-10 rounded-full bg-[#f0f4f8] flex items-center justify-center text-[#2d1b4e]">
@@ -80,7 +82,11 @@ const StickyApplyCard = ({
 
         <div className="pt-6 space-y-3">
           <Link
-            to={`/jobs/${job.id}/apply`}
+            to={
+              job.type === "Internship"
+                ? `/jobs/${job.id}/payment`
+                : `/jobs/${job.id}/apply`
+            }
             state={{ jobData: applicationJobData || job }}
             className="w-full bg-[#ffc12b] text-[#2d1b4e] font-bold py-4 rounded-xl hover:bg-[#ffcd57] transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-1 group relative overflow-hidden"
           >

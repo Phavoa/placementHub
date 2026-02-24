@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer"; // Assuming Footer is exported as default from Footer.jsx based on index.css analysis, but file list showed Footer.jsx exists.
 import JobCard from "./JobCard";
@@ -7,6 +8,9 @@ import { Search, SlidersHorizontal, ArrowDown, XCircle } from "lucide-react";
 import Hubtel from "../assets/hubtel.png"; // Reusing for mock data
 
 const JobListPage = () => {
+  const [searchParams] = useSearchParams();
+  const categoryFilter = searchParams.get("category");
+
   // Mock Data
   const mockJobs = Array(12)
     .fill({
@@ -21,17 +25,35 @@ const JobListPage = () => {
       salary: "₦150k - ₦250k/mo",
       tags: ["Design", "UI/UX", "Figma"],
     })
-    .map((job, i) => ({
-      ...job,
-      id: i + 1,
-      title: i % 2 === 0 ? "Senior Product Designer" : "Frontend Developer",
-      location:
-        i % 3 === 0
-          ? "Lagos, Nigeria"
-          : i % 3 === 1
-            ? "Abuja, Nigeria"
-            : "Port Harcourt, Nigeria",
-    }));
+    .map((job, i) => {
+      const isIntern = i % 4 === 3;
+      return {
+        ...job,
+        id: i + 1,
+        title: isIntern
+          ? "Software Engineering Intern"
+          : i % 2 === 0
+            ? "Senior Product Designer"
+            : "Frontend Developer",
+        type: isIntern ? "Internship" : "Full Time",
+        location:
+          i % 3 === 0
+            ? "Lagos, Nigeria"
+            : i % 3 === 1
+              ? "Abuja, Nigeria"
+              : "Port Harcourt, Nigeria",
+      };
+    });
+
+  const filteredJobs = categoryFilter
+    ? mockJobs.filter(
+        (job) =>
+          job.title.toLowerCase().includes(categoryFilter.toLowerCase()) ||
+          job.tags.some((tag) =>
+            tag.toLowerCase().includes(categoryFilter.toLowerCase()),
+          ),
+      )
+    : mockJobs;
 
   return (
     <div className="font-['Outfit'] bg-gray-50 text-gray-900 overflow-x-hidden min-h-screen flex flex-col">
@@ -93,7 +115,7 @@ const JobListPage = () => {
 
           {/* Job Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {mockJobs.map((job, index) => (
+            {filteredJobs.map((job, index) => (
               <div
                 key={job.id}
                 className="animate-fade-in-up"

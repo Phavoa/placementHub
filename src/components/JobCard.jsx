@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MapPin, Clock, DollarSign, ArrowRight } from "lucide-react";
 import Hubtel from "../assets/hubtel.png"; // Default logo fallback
 
 const JobCard = ({ job }) => {
+  const navigate = useNavigate();
   const {
     companyLogo = Hubtel,
     companyName,
@@ -16,7 +17,10 @@ const JobCard = ({ job }) => {
   } = job;
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col h-full group cursor-pointer relative overflow-hidden hover:-translate-y-1">
+    <div
+      onClick={() => navigate(`/jobs/${job.id}`)}
+      className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col h-full group cursor-pointer relative overflow-hidden hover:-translate-y-1"
+    >
       {/* Hover Gradient Border Effect */}
       <div className="absolute inset-x-0 bottom-0 h-1 bg-linear-to-r from-[#2d1b4e] to-[#ffc12b] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
@@ -67,20 +71,19 @@ const JobCard = ({ job }) => {
               {type}
             </div>
           </div>
-          <div className="font-bold text-[#2d1b4e] bg-[#ffc12b]/10 px-3 py-1 rounded-full">
-            {salary}
-          </div>
+          {type !== "Internship" && (
+            <div className="font-bold text-[#2d1b4e] bg-[#ffc12b]/10 px-3 py-1 rounded-full">
+              {salary}
+            </div>
+          )}
         </div>
 
-        <Link
-          to={`/jobs/${job.id}`}
-          className="w-full bg-[#ffc12b] text-[#2d1b4e] font-bold py-3 rounded-xl hover:bg-[#ffcd57] transition-all flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:gap-3 relative overflow-hidden"
-        >
+        <div className="w-full bg-[#ffc12b] text-[#2d1b4e] font-bold py-3 rounded-xl hover:bg-[#ffcd57] transition-all flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:gap-3 relative overflow-hidden">
           <span className="absolute top-0 -left-full w-full h-full bg-linear-to-r from-transparent via-white/40 to-transparent -skew-x-12 group-hover:animate-shine" />
           <span className="relative flex items-center justify-center gap-2">
             View Details <ArrowRight className="w-4 h-4 transition-all" />
           </span>
-        </Link>
+        </div>
       </div>
     </div>
   );

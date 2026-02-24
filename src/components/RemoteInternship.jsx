@@ -10,6 +10,7 @@ import {
   ArrowRight,
   MessageSquare,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import SmilingMan from "../assets/manSmiling.png";
@@ -17,6 +18,7 @@ import Hubtel from "../assets/hubtel.png";
 import Mail from "../assets/emailIcon.png";
 import { FiCheckSquare } from "react-icons/fi";
 const RemoteInternship = () => {
+  const navigate = useNavigate();
   // --- Data ---
 
   const faqs = [
@@ -73,7 +75,7 @@ const RemoteInternship = () => {
     {
       question: "Is the registration fee refundable?",
       answer:
-        "No, the registration fee is non-refundable as it confirms your enrollment and secures your access to our services.",
+        "Yes, the registration fee is a one-time payment that is fully refundable if you have not been successfully placed in a job after 1 month.",
     },
   ];
 
@@ -104,7 +106,10 @@ const RemoteInternship = () => {
                 We help you find the best remote internships with top companies
                 to kickstart your career. Gain experience, network, and grow.
               </p>
-              <button className="bg-[#2d1b4e] text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-purple-900 transition-all shadow-xl hover:shadow-2xl  hover:-translate-y-1">
+              <button
+                onClick={() => navigate("/internship-payment")}
+                className="bg-[#2d1b4e] text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-purple-900 transition-all shadow-xl hover:shadow-2xl  hover:-translate-y-1"
+              >
                 Apply Now
               </button>
             </div>
@@ -274,7 +279,10 @@ const RemoteInternship = () => {
             </div>
           </div>
 
-          <button className="mt-20 bg-[#ffc12b] text-[#2d1b4e] px-12 py-4 rounded-xl font-bold text-lg hover:bg-[#ffcd57] transition-all hover:scale-105 shadow-lg">
+          <button
+            onClick={() => navigate("/jobs")}
+            className="mt-20 bg-[#ffc12b] text-[#2d1b4e] px-12 py-4 rounded-xl font-bold text-lg hover:bg-[#ffcd57] transition-all hover:scale-105 shadow-lg"
+          >
             Get started
           </button>
         </div>
@@ -311,6 +319,9 @@ const RemoteInternship = () => {
               ].map((role, idx) => (
                 <div
                   key={idx}
+                  onClick={() =>
+                    navigate(`/jobs?category=${role.split(" ")[0]}`)
+                  }
                   className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex items-center gap-4 group cursor-pointer"
                 >
                   <div className="bg-[#F3F0F9] p-3 rounded-lg text-[#2d1b4e] group-hover:bg-[#2d1b4e] group-hover:text-white transition-colors">
@@ -328,6 +339,9 @@ const RemoteInternship = () => {
                 (role, idx) => (
                   <div
                     key={idx}
+                    onClick={() =>
+                      navigate(`/jobs?category=${role.split(" ")[0]}`)
+                    }
                     className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex items-center gap-4 group cursor-pointer w-full md:w-auto md:min-w-[350px]"
                   >
                     <div className="bg-[#F3F0F9] p-3 rounded-lg text-[#2d1b4e] group-hover:bg-[#2d1b4e] group-hover:text-white transition-colors">
@@ -370,7 +384,10 @@ const RemoteInternship = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <button className="bg-[#FFC12B] text-[#2d1b4e] font-bold px-8 py-3 rounded-xl hover:bg-[#ffcd57] transition-all w-full sm:w-auto min-w-[160px]">
+              <button
+                onClick={() => navigate("/internship-payment")}
+                className="bg-[#FFC12B] text-[#2d1b4e] font-bold px-8 py-3 rounded-xl hover:bg-[#ffcd57] transition-all w-full sm:w-auto min-w-[160px]"
+              >
                 Apply now
               </button>
               <button className="bg-transparent border border-[#FFC12B] text-[#FFC12B] font-bold px-8 py-3 rounded-xl hover:bg-[#FFC12B]/10 transition-all w-full sm:w-auto min-w-[160px]">
@@ -424,7 +441,10 @@ const RemoteInternship = () => {
               program for your situation.
             </p>
           </div>
-          <button className="bg-[#ffc12b] text-[#2d1b4e] px-10 py-4 rounded-xl font-bold hover:bg-yellow-400 transition-colors shadow-md whitespace-nowrap text-lg">
+          <button
+            onClick={() => navigate("/jobs")}
+            className="bg-[#ffc12b] text-[#2d1b4e] px-10 py-4 rounded-xl font-bold hover:bg-yellow-400 transition-colors shadow-md whitespace-nowrap text-lg"
+          >
             Get started
           </button>
         </div>
@@ -519,7 +539,10 @@ const RemoteInternship = () => {
                 Join the program
               </h3>
 
-              <button className="bg-[#ffc12b] text-[#2d1b4e] px-10 py-3 rounded-lg font-bold hover:bg-[#ffcd57] transition-all shadow-lg">
+              <button
+                onClick={() => navigate("/internship-payment")}
+                className="bg-[#ffc12b] text-[#2d1b4e] px-10 py-3 rounded-lg font-bold hover:bg-[#ffcd57] transition-all shadow-lg"
+              >
                 Apply Now
               </button>
             </div>
@@ -582,7 +605,10 @@ const RemoteInternship = () => {
               Start The Journey <br /> That Starts Everything!
             </h2>
 
-            <button className="bg-[#ffc12b] text-[#2d1b4e] px-12 py-5 rounded-full font-bold text-xl hover:bg-yellow-400 shadow-xl transition-transform hover:scale-105">
+            <button
+              onClick={() => navigate("/internship-payment")}
+              className="bg-[#ffc12b] text-[#2d1b4e] px-12 py-5 rounded-full font-bold text-xl hover:bg-yellow-400 shadow-xl transition-transform hover:scale-105"
+            >
               Join now
             </button>
           </div>

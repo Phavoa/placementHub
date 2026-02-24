@@ -84,11 +84,16 @@ const JobDetailsPage = () => {
         id: id,
         companyName: "Hubtel",
         companyLogo: Hubtel,
-        title: "Senior Product Designer",
+        title:
+          parseInt(id) % 4 === 0
+            ? "Software Engineering Intern"
+            : "Senior Product Designer",
         description:
-          "We are looking for an experienced Product Designer to join our team and help shape the future of fintech in Africa.",
+          parseInt(id) % 4 === 0
+            ? "We are looking for a motivated Software Engineering Intern to join our team and learn the ropes of building scalable fintech solutions."
+            : "We are looking for an experienced Product Designer to join our team and help shape the future of fintech in Africa.",
         location: "Lagos, Nigeria",
-        type: "Full Time",
+        type: parseInt(id) % 4 === 0 ? "Internship" : "Full Time",
         salary: "₦350k - ₦500k/mo",
         posted: "2 days ago",
         tags: ["Design", "Figma", "UI/UX", "Prototyping"],
@@ -185,11 +190,15 @@ const JobDetailsPage = () => {
                   <div className="flex items-center gap-1.5">
                     <Clock className="w-5 h-5 text-[#ffc12b]" /> {job.type}
                   </div>
-                  <span className="hidden md:block w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                  <div className="flex items-center gap-1.5 font-bold text-[#2d1b4e] bg-[#ffc12b]/10 px-3 py-1 rounded-full">
-                    <DollarSign className="w-4 h-4 text-[#ffc12b]" />{" "}
-                    {job.salary}
-                  </div>
+                  {job.type !== "Internship" && (
+                    <>
+                      <span className="hidden md:block w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                      <div className="flex items-center gap-1.5 font-bold text-[#2d1b4e] bg-[#ffc12b]/10 px-3 py-1 rounded-full">
+                        <DollarSign className="w-4 h-4 text-[#ffc12b]" />{" "}
+                        {job.salary}
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <div className="flex flex-wrap gap-2 mt-6">
@@ -219,7 +228,11 @@ const JobDetailsPage = () => {
                 <Share2 className="w-6 h-6" />
               </button>
               <Link
-                to={`/jobs/${id}/apply`}
+                to={
+                  job.type === "Internship"
+                    ? `/jobs/${id}/payment`
+                    : `/jobs/${id}/apply`
+                }
                 state={{ jobData: serializableJob }}
                 className="flex-1 lg:flex-none bg-[#ffc12b] text-[#2d1b4e] px-8 py-3 rounded-full font-bold hover:bg-[#ffcd57] transition-all shadow-lg hover:-translate-y-1 hover:shadow-xl text-lg flex items-center justify-center text-center"
               >
@@ -286,7 +299,11 @@ const JobDetailsPage = () => {
           </p>
           <div className="pt-4">
             <Link
-              to={`/jobs/${id}/apply`}
+              to={
+                job.type === "Internship"
+                  ? `/jobs/${id}/payment`
+                  : `/jobs/${id}/apply`
+              }
               state={{ jobData: serializableJob }}
               className="inline-block bg-[#ffc12b] text-[#2d1b4e] px-12 py-5 rounded-full font-bold text-xl hover:bg-[#ffcd57] transition-all shadow-xl hover:scale-105 hover:shadow-2xl"
             >
