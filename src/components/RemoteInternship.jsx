@@ -9,6 +9,10 @@ import {
   ChevronUp,
   ArrowRight,
   MessageSquare,
+  Backpack,
+  Users,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -80,9 +84,79 @@ const RemoteInternship = () => {
   ];
 
   const [openFaq, setOpenFaq] = useState(null);
+  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const testimonials = [
+    {
+      name: "Ayomide",
+      role: "Job role",
+      image: "https://i.pravatar.cc/100?img=12",
+      text: "Placement Hub gave me the opportunity I had been hoping for. They directly connected me with a job that suits my skills and career goals perfectly. Their guidance and support throughout the process made everything smooth and stress-free. Thanks to Placement Hub, I now have a role where I can grow professionally and gain real-world experience. I'm truly grateful for their dedication, expertise, and for making my career progress possible.",
+    },
+    {
+      name: "Ibrahim",
+      role: "Job role",
+      image: "https://i.pravatar.cc/100?img=11",
+      text: "I'm grateful to Placement Hub for connecting me with Big Fix Technologies and guiding me throughout the hiring process. Their steady communication and reassurance made the journey seamless. Their commitment to candidate success genuinely sets them apart.",
+    },
+    {
+      name: "Vincent",
+      role: "Job role",
+      image: "https://i.pravatar.cc/100?img=56",
+      text: "I'm thrilled to share that Placement Hub played a pivotal role in helping me land a job after a long search! Their team's expertise and dedication made all the difference. With Placement Hub, I finally found a role that is a great fit for me. If you're struggling to find the right opportunity, I highly recommend giving Placement Hub a shot.",
+    },
+    {
+      name: "Chidi",
+      role: "Job role",
+      image: "https://i.pravatar.cc/100?img=13",
+      text: "As an undergraduate, I was worried about my lack of experience. Placement Hub not only found me a suitable internship but also provided training that made me feel confident from day one. I'm now working on real projects and learning every day. Their support is truly unmatched.",
+    },
+    {
+      name: "Fatimah",
+      role: "Job role",
+      image: "https://i.pravatar.cc/100?img=44",
+      text: "The transition from being a student to a professional can be daunting, but Placement Hub made it seamless. They understood my career goals and matched me with a company that aligns perfectly with my values. I highly recommend their program to every fresh graduate.",
+    },
+    {
+      name: "Kofi",
+      role: "Job role",
+      image: "https://i.pravatar.cc/100?img=3",
+      text: "Placement Hub connected me with a remote role that allows me to work with an international team. The exposure I've gotten so far is incredible. Their interview prep was a game-changer for me. Truly grateful for this opportunity!",
+    },
+    {
+      name: "Blessing",
+      role: "Job role",
+      image: "https://i.pravatar.cc/100?img=5",
+      text: "I was struggling to find a job after my NYSC until I found Placement Hub. They helped me refine my CV and prepared me for interviews. Within three weeks, I was placed in a role that fits my background. Their team is professional and result-oriented.",
+    },
+    {
+      name: "Emmanuel",
+      role: "Job role",
+      image: "https://i.pravatar.cc/100?img=8",
+      text: "What I love about Placement Hub is their personalized approach. They don't just find you a job; they find you the *right* job. The mentoring I received has been invaluable to my career growth. I'm now much more confident in my skills.",
+    },
+    {
+      name: "Ngozi",
+      role: "Job role",
+      image: "https://i.pravatar.cc/100?img=10",
+      text: "Placement Hub's program is well-structured and highly effective. From registration to placement, the process was transparent and smooth. I'm now working in a role where I'm constantly challenged and empowered. Thank you, Placement Hub!",
+    },
+  ];
+
+  const nextSlide = () => {
+    setCurrentTestimonialIndex((prev) =>
+      prev + 3 >= testimonials.length ? 0 : prev + 3,
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentTestimonialIndex((prev) =>
+      prev - 3 < 0 ? Math.max(0, testimonials.length - 3) : prev - 3,
+    );
   };
 
   return (
@@ -362,27 +436,15 @@ const RemoteInternship = () => {
       <section className="bg-[#2d1b4e] py-24 px-4 text-center text-white">
         <div className="max-w-4xl mx-auto space-y-12">
           {/* Top Block */}
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Partnerships
-            </h2>
-            <p className="text-white/80 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-              We are open to partnerships with employers.
-              <br className="hidden md:block" /> Join our network of employers
-              to access our talent pool
-            </p>
-          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Partnerships</h2>
+          <p className="text-white/80 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+            We are open to partnerships with employers.
+            <br className="hidden md:block" /> Join our network of employers to
+            access our talent pool
+          </p>
 
           {/* Bottom Block */}
           <div>
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Begin Your Journey, Shape Your Future
-            </h3>
-            <p className="text-white/80 text-lg leading-relaxed max-w-3xl mx-auto mb-10">
-              Be the first to grab your spot in the fast lane and watch your
-              career take off with an impactful placement.
-            </p>
-
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <button
                 onClick={() => navigate("/internship-payment")}
@@ -398,52 +460,139 @@ const RemoteInternship = () => {
         </div>
       </section>
 
-      {/* --- ELIGIBILITY --- */}
-      {/* --- ELIGIBILITY --- */}
-      <section className="bg-[#FFB4000D] py-24 px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-20 text-[#1f1f1f]">
-          Who Is Eligible To Apply
-        </h2>
-
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 md:gap-32 mb-20 relative">
-          {/* Item 1 */}
-          <div className="flex flex-col items-center">
-            <GraduationCap className="w-12 h-12 text-[#ffc12b] mb-6" />
-            <h3 className="font-bold text-2xl mb-4 text-[#4c3b71]">
-              Graduates
-            </h3>
-            <p className="text-gray-500 max-w-sm text-lg leading-relaxed">
-              Graduates (HND or BSc) with at least one year of relevant work
-              experience
+      {/* --- TESTIMONIALS --- */}
+      <section className="bg-white py-24 px-4 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1f1f1f] mb-4">
+              What people are saying about us
+            </h2>
+            <p className="text-gray-500 text-lg">
+              See what others are saying about our services
             </p>
           </div>
 
-          {/* Item 2 */}
+          <div className="relative">
+            <div className="overflow-hidden">
+              <div
+                className="flex transition-transform duration-500 ease-in-out gap-6"
+                style={{
+                  transform: `translateX(-${currentTestimonialIndex * (100 / 3)}%)`,
+                }}
+              >
+                {testimonials.map((t, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-[#F9FAFB] p-8 rounded-[2.5rem] flex-shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex flex-col h-full"
+                  >
+                    <div className="flex items-center gap-4 mb-8">
+                      <img
+                        src={t.image}
+                        alt={t.name}
+                        className="w-14 h-14 rounded-full object-cover"
+                      />
+                      <div>
+                        <h4 className="font-bold text-xl text-[#2d1b4e]">
+                          {t.name}
+                        </h4>
+                        <p className="text-gray-500 text-sm">{t.role}</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed text-base">
+                      {t.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Arrows */}
+            <div className="flex justify-end gap-4 mt-8">
+              <button
+                onClick={prevSlide}
+                className="w-12 h-12 rounded-full bg-[#2d1b4e] text-white flex items-center justify-center hover:bg-purple-900 transition-colors shadow-lg z-10"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="w-12 h-12 rounded-full bg-[#2d1b4e] text-white flex items-center justify-center hover:bg-purple-900 transition-colors shadow-lg z-10"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- ELIGIBILITY --- */}
+      <section className="bg-[#FFFDF5] py-24 px-4 text-center">
+        <h2 className="text-3xl md:text-5xl font-bold mb-20 text-[#1f1f1f]">
+          Who Is Eligible to Apply
+        </h2>
+
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 mb-24">
+          {/* Fresh Graduates */}
           <div className="flex flex-col items-center">
-            <MessageSquare className="w-12 h-12 text-[#ffc12b] mb-6" />
-            <h3 className="font-bold text-2xl mb-4 text-[#4c3b71]">
-              Interpersonal Skills
+            <div className="bg-transparent mb-6">
+              <GraduationCap
+                className="w-10 h-10 text-[#ffc12b]"
+                strokeWidth={1.5}
+              />
+            </div>
+            <h3 className="font-bold text-2xl mb-4 text-[#2d1b4e]">
+              Fresh Graduates
             </h3>
-            <p className="text-gray-500 max-w-sm text-lg leading-relaxed">
-              Confident communicators with interpersonal skills that make
-              collaboration effortless
+            <p className="text-gray-500 max-w-[280px] text-base leading-relaxed">
+              Ideal for those seeking their first professional opportunity and
+              career growth.
+            </p>
+          </div>
+
+          {/* Undergraduates */}
+          <div className="flex flex-col items-center">
+            <div className="bg-transparent mb-6">
+              <Backpack
+                className="w-10 h-10 text-[#ffc12b]"
+                strokeWidth={1.5}
+              />
+            </div>
+            <h3 className="font-bold text-2xl mb-4 text-[#2d1b4e]">
+              Undergraduates
+            </h3>
+            <p className="text-gray-500 max-w-[280px] text-base leading-relaxed">
+              Suitable for students looking to gain hands-on experience while
+              studying.
+            </p>
+          </div>
+
+          {/* Corp Members */}
+          <div className="flex flex-col items-center">
+            <div className="bg-transparent mb-6">
+              <Users className="w-10 h-10 text-[#ffc12b]" strokeWidth={1.5} />
+            </div>
+            <h3 className="font-bold text-2xl mb-4 text-[#2d1b4e]">
+              Corp Members
+            </h3>
+            <p className="text-gray-500 max-w-[280px] text-base leading-relaxed">
+              Open to NYSC members ready for placement or career development.
             </p>
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto bg-[#FFB4001A] p-8 md:p-12 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-8 border border-[#FFB4001A]">
+        <div className="max-w-6xl mx-auto bg-[#FFF9EA] p-8 md:p-14 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 border border-transparent shadow-sm">
           <div className="text-left">
-            <h4 className="font-bold text-2xl text-[#4c3b71] mb-2">
+            <h4 className="font-bold text-2xl text-[#2d1b4e] mb-2">
               Not sure if you qualify?
             </h4>
-            <p className="text-gray-600 font-medium text-lg">
+            <p className="text-gray-500 text-lg">
               Contact our admissions team and we'll help you determine the best
               program for your situation.
             </p>
           </div>
           <button
             onClick={() => navigate("/jobs")}
-            className="bg-[#ffc12b] text-[#2d1b4e] px-10 py-4 rounded-xl font-bold hover:bg-yellow-400 transition-colors shadow-md whitespace-nowrap text-lg"
+            className="bg-[#ffc12b] text-[#2d1b4e] px-10 py-5 rounded-2xl font-bold hover:bg-[#ffcd57] transition-all shadow-sm whitespace-nowrap text-lg"
           >
             Get started
           </button>
