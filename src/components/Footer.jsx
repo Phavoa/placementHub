@@ -1,201 +1,118 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Globe, Monitor, Briefcase, Megaphone } from "lucide-react";
 
-function Footer() {
-  const [showScroll, setShowScroll] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setShowScroll(window.scrollY > 200);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-
+const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="footer-content">
-        <ul>
-          <li>
-            <svg
-              width="24"
-              height="25"
-              viewBox="0 0 24 25"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.30631 11.6933C5.86669 12.1675 3.50456 10.5742 3.03034 8.1346C2.55613 5.69499 4.14941 3.33285 6.58903 2.85864C9.02864 2.38443 11.3908 3.9777 11.865 6.41732C12.3392 8.85696 10.7459 11.2191 8.30631 11.6933Z"
-                stroke="#FAFAFA"
-                stroke-width="1.5"
-              />
-              <path
-                d="M12.6719 22.5518H6.76275C5.21737 22.5518 3.98819 21.7998 2.88454 20.7484C0.625241 18.5959 4.33468 16.8758 5.74945 16.0334C7.99888 14.694 10.6584 14.2627 13.1719 14.7396"
-                stroke="#FAFAFA"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M17.863 15.1295L18.5669 16.549C18.6629 16.7465 18.9188 16.9361 19.1348 16.9724L20.4107 17.1861C21.2266 17.3232 21.4186 17.92 20.8306 18.5088L19.8387 19.5089C19.6708 19.6783 19.5788 20.0049 19.6308 20.2388L19.9147 21.4768C20.1387 22.4567 19.6228 22.8358 18.7629 22.3236L17.567 21.6099C17.351 21.4808 16.9951 21.4808 16.7751 21.6099L15.5792 22.3236C14.7233 22.8358 14.2034 22.4527 14.4273 21.4768L14.7113 20.2388C14.7633 20.0049 14.6713 19.6783 14.5033 19.5089L13.5114 18.5088C12.9275 17.92 13.1155 17.3232 13.9314 17.1861L15.2072 16.9724C15.4192 16.9361 15.6752 16.7465 15.7712 16.549L16.4751 15.1295C16.8591 14.3592 17.483 14.3592 17.863 15.1295Z"
-                stroke="#FAFAFA"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            About Us
-          </li>
-          <li>
-            <svg
-              width="45"
-              height="44"
-              viewBox="0 0 45 44"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.9495 21.9424C13.0015 20.2893 12.5437 18.9395 12.2677 17.5712C11.8595 15.5476 12.7937 13.5708 14.3413 12.3095C14.9953 11.7764 15.7451 11.9585 16.1319 12.6524L17.0051 14.2189C17.6972 15.4606 18.0432 16.0814 17.9746 16.7396C17.9059 17.3978 17.4392 17.9339 16.5058 19.006L13.9495 21.9424ZM13.9495 21.9424C15.8684 25.2883 18.8797 28.3013 22.2295 30.2224M22.2295 30.2224C23.8826 31.1704 25.2324 31.6282 26.6007 31.9042C28.6243 32.3124 30.6011 31.3782 31.8624 29.8306C32.3955 29.1766 32.2134 28.4268 31.5195 28.04L29.953 27.1668C28.7113 26.4747 28.0905 26.1287 27.4323 26.1973C26.7741 26.2659 26.238 26.7326 25.1659 27.666L22.2295 30.2224Z"
-                stroke="#FAFAFA"
-                stroke-width="1.5"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M31.1719 15.5H23.1719M31.1719 15.5C31.1719 16.2002 29.1776 17.5085 28.6719 18M31.1719 15.5C31.1719 14.7998 29.1776 13.4915 28.6719 13"
-                stroke="#FAFAFA"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            +234 906 852 0591
-          </li>
-          <li>
-            <svg
-              width="41"
-              height="37"
-              viewBox="0 0 41 37"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10.1719 12.5L17.0849 16.4246C19.6106 17.8585 20.7332 17.8585 23.2589 16.4246L30.1719 12.5"
-                stroke="#FAFAFA"
-                stroke-width="1.5"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M19.6719 27C19.6719 27 18.241 26.9878 17.2707 26.9634C14.1222 26.8843 12.548 26.8448 11.4168 25.7094C10.2857 24.5739 10.253 23.0412 10.1876 19.9756C10.1666 18.9899 10.1666 18.0101 10.1876 17.0244C10.253 13.9589 10.2857 12.4261 11.4168 11.2907C12.548 10.1552 14.1222 10.1157 17.2707 10.0366C19.2112 9.98781 21.1326 9.98781 23.0731 10.0366C26.2216 10.1157 27.7958 10.1552 28.927 11.2907C30.0581 12.4261 30.0908 13.9589 30.1561 17.0244C30.1637 17.3812 30.1686 17.9995 30.1707 18.5"
-                stroke="#FAFAFA"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M22.1719 24H30.1719M26.1719 28V20"
-                stroke="#FAFAFA"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            <p>placemhub@gmail.com</p>
-          </li>
-        </ul>
-
-        <div className="social-media">
-          <div className="social-icons">
-            <a
-              href="https://chat.whatsapp.com/GqOVZloiq2Z7qwVZCcxtJX"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Contact us on WhatsApp"
-              className="social-icon whatsapp"
-            >
-              <svg
-                width="23"
-                height="22"
-                viewBox="0 0 23 22"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M22.1719 10.7167C22.1719 16.6354 17.337 21.4334 11.3718 21.4334C9.47812 21.4334 7.69905 20.9494 6.15123 20.0999L0.171875 22L2.12132 16.2502C1.13792 14.6354 0.571542 12.7414 0.571542 10.7167C0.571542 4.79796 5.4069 0 11.3718 0C17.3375 0 22.1719 4.79796 22.1719 10.7167ZM11.3718 1.70671C6.36463 1.70671 2.2917 5.7486 2.2917 10.7167C2.2917 12.6881 2.93434 14.5139 4.02139 15.9991L2.88692 19.3453L6.37636 18.2363C7.81003 19.1776 9.5275 19.7267 11.3721 19.7267C16.3785 19.7267 20.4522 15.6853 20.4522 10.7172C20.4522 5.74909 16.3788 1.70671 11.3718 1.70671ZM16.8256 13.1848C16.7589 13.0756 16.5827 13.0096 16.3182 12.8783C16.0532 12.747 14.7513 12.1112 14.5093 12.024C14.2665 11.9365 14.0896 11.8925 13.9133 12.1552C13.7371 12.4183 13.2296 13.0096 13.0749 13.1848C12.9204 13.3606 12.7661 13.3826 12.5012 13.2511C12.2367 13.1198 11.3838 12.8421 10.3725 11.9475C9.58568 11.2513 9.05425 10.3918 8.89976 10.1286C8.74552 9.86578 8.88363 9.72376 9.01587 9.59298C9.13516 9.47516 9.28085 9.2862 9.4131 9.13293C9.54583 8.97942 9.58983 8.87016 9.67759 8.69464C9.76632 8.51938 9.72208 8.36611 9.65559 8.23436C9.58959 8.10309 9.05963 6.81047 8.83914 6.28442C8.61865 5.75887 8.39841 5.84638 8.24368 5.84638C8.08943 5.84638 7.9127 5.82438 7.73621 5.82438C7.55972 5.82438 7.27274 5.89013 7.03001 6.15291C6.78752 6.41593 6.10381 7.05149 6.10381 8.34387C6.10381 9.63649 7.05201 10.8854 7.18474 11.0604C7.31699 11.2354 9.01563 13.9742 11.707 15.026C14.3985 16.0774 14.3985 15.7266 14.884 15.6826C15.369 15.6388 16.4499 15.0473 16.6714 14.4342C16.8914 13.8202 16.8914 13.2944 16.8256 13.1848Z"
-                  fill="#FAFAFA"
-                />
-              </svg>
-              <span className="sr-only">WhatsApp</span>
-            </a>
-
-            <a
-              href="https://www.instagram.com/placemhub"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Follow us on Instagram"
-              className="social-icon instagram"
-            >
-              <svg
-                width="20"
-                height="21"
-                viewBox="0 0 20 21"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="_wauiIcon__instagram _adid _arcp _afbl"
-              >
-                <path
-                  d="M15.34 3.96C15.1027 3.96 14.8707 4.03038 14.6733 4.16224C14.476 4.29409 14.3222 4.48151 14.2313 4.70078C14.1405 4.92005 14.1168 5.16133 14.1631 5.39411C14.2094 5.62689 14.3236 5.84071 14.4915 6.00853C14.6593 6.17635 14.8731 6.29064 15.1059 6.33694C15.3387 6.38324 15.5799 6.35948 15.7992 6.26866C16.0185 6.17783 16.2059 6.02402 16.3378 5.82668C16.4696 5.62935 16.54 5.39734 16.54 5.16C16.54 4.84174 16.4136 4.53652 16.1885 4.31147C15.9635 4.08643 15.6583 3.96 15.34 3.96ZM19.94 6.38C19.9206 5.5503 19.7652 4.7294 19.48 3.95C19.2257 3.28313 18.83 2.67928 18.32 2.18C17.8248 1.66743 17.2196 1.27418 16.55 1.03C15.7727 0.736161 14.9508 0.57721 14.12 0.56C13.06 0.5 12.72 0.5 10 0.5C7.28 0.5 6.94 0.5 5.88 0.56C5.04915 0.57721 4.22734 0.736161 3.45 1.03C2.78168 1.27665 2.17693 1.66956 1.68 2.18C1.16743 2.67518 0.774176 3.28044 0.53 3.95C0.236161 4.72734 0.07721 5.54915 0.0599999 6.38C-5.58794e-08 7.44 0 7.78 0 10.5C0 13.22 -5.58794e-08 13.56 0.0599999 14.62C0.07721 15.4508 0.236161 16.2727 0.53 17.05C0.774176 17.7196 1.16743 18.3248 1.68 18.82C2.17693 19.3304 2.78168 19.7234 3.45 19.97C4.22734 20.2638 5.04915 20.4228 5.88 20.44C6.94 20.5 7.28 20.5 10 20.5C12.72 20.5 13.06 20.5 14.12 20.44C14.9508 20.4228 15.7727 20.2638 16.55 19.97C17.2196 19.7258 17.8248 19.3326 18.32 18.82C18.8322 18.3226 19.2283 17.7182 19.48 17.05C19.7652 16.2706 19.9206 15.4497 19.94 14.62C19.94 13.56 20 13.22 20 10.5C20 7.78 20 7.44 19.94 6.38ZM18.14 14.5C18.1327 15.1348 18.0178 15.7637 17.8 16.36C17.6403 16.7952 17.3839 17.1884 17.05 17.51C16.7256 17.8405 16.3332 18.0964 15.9 18.26C15.3037 18.4778 14.6748 18.5927 14.04 18.6C13.04 18.65 12.67 18.66 10.04 18.66C7.41 18.66 7.04 18.66 6.04 18.6C5.38089 18.6123 4.72459 18.5109 4.1 18.3C3.68578 18.1281 3.31136 17.8728 3 17.55C2.66809 17.2287 2.41484 16.8352 2.26 16.4C2.01586 15.7952 1.88044 15.1519 1.86 14.5C1.86 13.5 1.8 13.13 1.8 10.5C1.8 7.87 1.8 7.5 1.86 6.5C1.86448 5.85106 1.98295 5.20795 2.21 4.6C2.38605 4.17791 2.65627 3.80166 3 3.5C3.30381 3.15617 3.67929 2.8831 4.1 2.7C4.70955 2.48004 5.352 2.36508 6 2.36C7 2.36 7.37 2.3 10 2.3C12.63 2.3 13 2.3 14 2.36C14.6348 2.36728 15.2637 2.48225 15.86 2.7C16.3144 2.86865 16.7223 3.14285 17.05 3.5C17.3777 3.80718 17.6338 4.18273 17.8 4.6C18.0223 5.20893 18.1373 5.85178 18.14 6.5C18.19 7.5 18.2 7.87 18.2 10.5C18.2 13.13 18.19 13.5 18.14 14.5ZM10 5.37C8.98581 5.37198 7.99496 5.67453 7.15265 6.23942C6.31035 6.80431 5.65438 7.6062 5.26763 8.54375C4.88089 9.48131 4.78072 10.5125 4.97979 11.5069C5.17886 12.5014 5.66824 13.4145 6.38608 14.131C7.10392 14.8474 8.01801 15.335 9.01286 15.5321C10.0077 15.7293 11.0387 15.6271 11.9755 15.2385C12.9123 14.85 13.7129 14.1924 14.2761 13.349C14.8394 12.5056 15.14 11.5142 15.14 10.5C15.1413 9.8251 15.0092 9.15661 14.7512 8.53296C14.4933 7.90931 14.1146 7.34281 13.6369 6.86605C13.1592 6.38929 12.5919 6.01168 11.9678 5.75493C11.3436 5.49818 10.6749 5.36736 10 5.37ZM10 13.83C9.34139 13.83 8.69757 13.6347 8.14995 13.2688C7.60234 12.9029 7.17552 12.3828 6.92348 11.7743C6.67144 11.1659 6.6055 10.4963 6.73398 9.85035C6.86247 9.20439 7.17963 8.61104 7.64533 8.14533C8.11104 7.67963 8.70439 7.36247 9.35035 7.23398C9.99631 7.1055 10.6659 7.17144 11.2743 7.42348C11.8828 7.67552 12.4029 8.10234 12.7688 8.64995C13.1347 9.19757 13.33 9.84139 13.33 10.5C13.33 10.9373 13.2439 11.3703 13.0765 11.7743C12.9092 12.1784 12.6639 12.5454 12.3547 12.8547C12.0454 13.1639 11.6784 13.4092 11.2743 13.5765C10.8703 13.7439 10.4373 13.83 10 13.83Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-              <span className="sr-only">Instagram</span>
-            </a>
-
-            <a
-              href="https://www.facebook.com/profile.php?id=61578000431182"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Follow us on Facebook"
-              className="social-icon facebook"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                  fill="#FAFAFA"
-                />
-              </svg>
-              <span className="sr-only">Facebook</span>
-            </a>
+    <footer className="bg-[#f0f4f8] pt-24 pb-12 px-4 border-t border-gray-200">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-20">
+        <div className="col-span-1 md:col-span-1">
+          <p className="text-sm text-gray-600 mb-8 max-w-xs leading-relaxed">
+            Placement Plus is your gateway to global career opportunities. We
+            connect talent with top companies worldwide.
+          </p>
+          <div className="flex gap-4">
+            <div className="w-10 h-10 bg-blue-600 rounded-full text-white flex items-center justify-center hover:bg-blue-700 cursor-pointer transition-colors shadow-sm">
+              <Globe className="w-5 h-5" />
+            </div>
+            <div className="w-10 h-10 bg-sky-500 rounded-full text-white flex items-center justify-center hover:bg-sky-600 cursor-pointer transition-colors shadow-sm">
+              <Monitor className="w-5 h-5" />
+            </div>
+            <div className="w-10 h-10 bg-blue-800 rounded-full text-white flex items-center justify-center hover:bg-blue-900 cursor-pointer transition-colors shadow-sm">
+              <Briefcase className="w-5 h-5" />
+            </div>
+            <div className="w-10 h-10 bg-pink-600 rounded-full text-white flex items-center justify-center hover:bg-pink-700 cursor-pointer transition-colors shadow-sm">
+              <Megaphone className="w-5 h-5" />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="office">
-        <p>
-          <strong>Office Address: </strong>08, Adelabu street, Surulere Lagos
-          Nigeria.
-        </p>
-      </div>
-      <div className="footer-bottom">
-        <p>
-          &copy; {new Date().getFullYear()} Placement-Hub. All rights reserved.
-        </p>
+
+        <div>
+          <h4 className="font-bold text-[#2d1b4e] mb-6 text-lg">Company</h4>
+          <ul className="space-y-4 text-gray-600">
+            <li>
+              <a href="#" className="hover:text-[#2d1b4e]">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-[#2d1b4e]">
+                Careers
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-[#2d1b4e]">
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-[#2d1b4e]">
+                Pricing
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-[#2d1b4e] mb-6 text-lg">Resources</h4>
+          <ul className="space-y-4 text-gray-600">
+            <li>
+              <a href="#" className="hover:text-[#2d1b4e]">
+                Templates
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-[#2d1b4e]">
+                Tutorials
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-[#2d1b4e]">
+                Free Resources
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-[#2d1b4e]">
+                Contract Templates
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-[#2d1b4e] mb-6 text-lg">Legal</h4>
+          <ul className="space-y-4 text-gray-600">
+            <li>
+              <a href="#" className="hover:text-[#2d1b4e]">
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-[#2d1b4e]">
+                Terms of Service
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-[#2d1b4e]">
+                Cookie Policy
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-[#2d1b4e]">
+                GDPR
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      {showScroll && (
-        <button
-          className="scroll-to-top"
-          onClick={scrollToTop}
-          aria-label="Scroll to top"
-        >
-          ↑
+      <div className="max-w-7xl mx-auto pt-8 border-t border-gray-300 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 gap-4">
+        <p>© 2026 Placement Plus. All rights reserved.</p>
+        <button className="flex items-center gap-2 hover:text-[#2d1b4e]">
+          Follow Us
         </button>
-      )}
+      </div>
     </footer>
   );
-}
+};
 
 export default Footer;
