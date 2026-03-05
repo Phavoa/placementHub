@@ -11,7 +11,10 @@ import JobListPage from "./components/JobListPage";
 import JobDetailsPage from "./components/JobDetailsPage";
 import CreateJobPage from "./components/admin/CreateJobPage";
 import JobApplicationPage from "./components/application/JobApplicationPage";
-import InternshipPaymentPage from "./components/InternshipPaymentPage";
+import InternshipApplicationPage from "./components/InternshipApplicationPage";
+import InternshipDashboard from "./components/InternshipDashboard";
+import InternshipApplicationDetail from "./components/InternshipApplicationDetail";
+import InternshipProgramManager from "./components/InternshipProgramManager";
 
 function App() {
   return (
@@ -28,12 +31,20 @@ function App() {
           <Route path="/jobs" element={<JobListPage />} />
           <Route path="/jobs/:id/apply" element={<JobApplicationPage />} />
           <Route path="/jobs/:id" element={<JobDetailsPage />} />
-          <Route path="/jobs/:id/payment" element={<InternshipPaymentPage />} />
           <Route
-            path="/internship-payment"
-            element={<InternshipPaymentPage />}
+            path="/internship-application"
+            element={<InternshipApplicationPage />}
           />
           <Route path="/admin/create-job" element={<CreateJobPage />} />
+          <Route path="/admin/internship" element={<InternshipDashboard />} />
+          <Route
+            path="/admin/internship/:id"
+            element={<InternshipApplicationDetail />}
+          />
+          <Route
+            path="/admin/programs"
+            element={<InternshipProgramManager />}
+          />
           <Route path="/cybersecuritysignup" element={<CyberLandingPage />} />
         </Routes>
       </Router>

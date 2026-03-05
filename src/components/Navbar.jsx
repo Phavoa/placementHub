@@ -8,7 +8,8 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Programs", href: "/programs" },
+    { name: "Internships", href: "/jobs" },
+
     { name: "Training", href: "/training" },
     { name: "About", href: "/about" },
   ];
@@ -40,7 +41,7 @@ const Navbar = () => {
           {/* Desktop Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <Button className="bg-[#3E1D67] hover:bg-[#2a1345] text-white rounded-xl px-8 py-6 text-base font-semibold shadow-sm transition-transform hover:scale-105">
-              <a href="/apply">Apply</a>
+              <a href="/internship-application">Apply</a>
             </Button>
             <Button
               variant="outline"

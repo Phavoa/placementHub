@@ -6,6 +6,7 @@ import SectionBlock from "./SectionBlock";
 import StickyApplyCard from "./StickyApplyCard";
 import SimilarJobs from "./SimilarJobs";
 import Hubtel from "../assets/hubtel.png";
+import api from "../utils/api";
 import {
   MapPin,
   Clock,
@@ -27,6 +28,28 @@ const JobDetailsPage = () => {
   }, [id]);
 
   const [isSaved, setIsSaved] = useState(false);
+  const [job, setJob] = useState(previewData || null);
+  const [isLoading, setIsLoading] = useState(!previewData);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchJob = async () => {
+      if (previewData) {
+        setIsLoading(false);
+        return;
+      }
+      try {
+        const response = await api.get(`/jobs/${id}`);
+        setJob(response.data);
+      } catch (err) {
+        console.error("Failed to fetch job details:", err);
+        setError("Job not found or failed to load.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchJob();
+  }, [id, previewData]);
 
   useEffect(() => {
     const savedJobs = JSON.parse(localStorage.getItem("savedJobs") || "[]");
@@ -34,18 +57,21 @@ const JobDetailsPage = () => {
   }, [id]);
 
   const handleSave = () => {
+    if (!job) return;
+    const jobId = job._id || job.id || id;
     const savedJobs = JSON.parse(localStorage.getItem("savedJobs") || "[]");
     let newSavedJobs;
     if (isSaved) {
-      newSavedJobs = savedJobs.filter((jobId) => jobId !== id);
+      newSavedJobs = savedJobs.filter((savedId) => savedId !== jobId);
     } else {
-      newSavedJobs = [...savedJobs, id];
+      newSavedJobs = [...savedJobs, jobId];
     }
     localStorage.setItem("savedJobs", JSON.stringify(newSavedJobs));
     setIsSaved(!isSaved);
   };
 
   const handleShare = async () => {
+    if (!job) return;
     if (navigator.share) {
       try {
         await navigator.share({
@@ -62,86 +88,61 @@ const JobDetailsPage = () => {
     }
   };
 
-  // Job Data (Preview or Mock)
-  const job = previewData
-    ? {
-        id: "preview",
-        companyName: previewData.companyName || "Company Name",
-        companyLogo: Hubtel, // Fallback/Placeholder
-        title: previewData.title || "Job Title",
-        description: previewData.overview || "Job Description",
-        location: previewData.location,
-        type: previewData.type,
-        salary: previewData.salary || "Not specified",
-        posted: "Just now",
-        tags: ["Preview", "Job"],
-        overview: previewData.overview,
-        responsibilities: previewData.responsibilities.filter((i) => i),
-        requirements: previewData.requirements.filter((i) => i),
-        benefits: previewData.benefits.filter((i) => i),
-      }
-    : {
-        id: id,
-        companyName: "Hubtel",
-        companyLogo: Hubtel,
-        title:
-          parseInt(id) % 4 === 0
-            ? "Software Engineering Intern"
-            : "Senior Product Designer",
-        description:
-          parseInt(id) % 4 === 0
-            ? "We are looking for a motivated Software Engineering Intern to join our team and learn the ropes of building scalable fintech solutions."
-            : "We are looking for an experienced Product Designer to join our team and help shape the future of fintech in Africa.",
-        location: "Lagos, Nigeria",
-        type: parseInt(id) % 4 === 0 ? "Internship" : "Full Time",
-        salary: "₦350k - ₦500k/mo",
-        posted: "2 days ago",
-        tags: ["Design", "Figma", "UI/UX", "Prototyping"],
-        overview: (
-          <>
-            <p>
-              As a Senior Product Designer at Hubtel, you will drive the design
-              vision for our core payment products. You will collaborate closely
-              with engineers, product managers, and researchers to create
-              intuitive and impactful user experiences.
-            </p>
-            <p>
-              We value creativity, user-centric thinking, and a passion for
-              solving complex problems. You will work in a fast-paced
-              environment where your contributions will directly impact millions
-              of users across the continent.
-            </p>
-          </>
-        ),
-        responsibilities: [
-          "Lead the end-to-end design process for major features, from concept to launch.",
-          "Create high-fidelity wireframes, prototypes, and design specs using Figma.",
-          "Conduct user research and usability testing to validate design decisions.",
-          "Collaborate with the engineering team to ensure high-quality implementation.",
-          "Mentor junior designers and contribute to the design system.",
-        ],
-        requirements: [
-          "5+ years of experience in product design, preferably in fintech or SaaS.",
-          "Strong portfolio demonstrating expertise in UI/UX and interaction design.",
-          "Proficiency in Figma, Adobe XO, and prototyping tools.",
-          "Excellent communication skills and ability to articulate design rationale.",
-          "Experience working in an agile environment.",
-        ],
-        benefits: [
-          "Competitive salary and performance-based bonuses.",
-          "Comprehensive health insurance for you and your family.",
-          "Remote-friendly work policy and flexible hours.",
-          "Professional development budget and learning resources.",
-          "Regular team retreats and social events.",
-        ],
-      };
+  if (isLoading) {
+    return (
+      <div className="font-['Outfit'] bg-gray-50 min-h-screen flex flex-col">
+        <Navbar />
+        <div className="flex-1 flex flex-col items-center justify-center">
+          <div className="w-12 h-12 border-4 border-[#2d1b4e]/20 border-t-[#2d1b4e] rounded-full animate-spin"></div>
+          <p className="mt-4 text-gray-500 font-medium">
+            Loading job details...
+          </p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error || !job) {
+    return (
+      <div className="font-['Outfit'] bg-gray-50 min-h-screen flex flex-col">
+        <Navbar />
+        <div className="flex-1 flex flex-col items-center justify-center text-center p-4">
+          <h2 className="text-3xl font-bold text-[#2d1b4e] mb-4">
+            Job Not Found
+          </h2>
+          <p className="text-gray-500 mb-8 max-w-md">
+            {error ||
+              "The job you are looking for does not exist or has been removed."}
+          </p>
+          <Link
+            to="/jobs"
+            className="bg-[#2d1b4e] text-white px-8 py-3 rounded-full font-bold hover:bg-purple-900 transition-colors"
+          >
+            Browse All Jobs
+          </Link>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Ensure default arrays and fallback data to prevent mapped undefined errors
+  const safeJob = {
+    ...job,
+    companyLogo: job.companyLogo || Hubtel,
+    tags: job.tags || [],
+    responsibilities: job.responsibilities || [],
+    requirements: job.requirements || [],
+    benefits: job.benefits || [],
+  };
 
   // Create a serializable version of the job object for navigation state
-  // (Removes React elements like 'overview' JSX to prevent DataCloneError)
   const serializableJob = {
-    ...job,
-    overview: typeof job.overview === "string" ? job.overview : "",
-    companyLogo: typeof job.companyLogo === "string" ? job.companyLogo : "", // Ensure image path is string
+    ...safeJob,
+    overview: typeof safeJob.overview === "string" ? safeJob.overview : "",
+    companyLogo:
+      typeof safeJob.companyLogo === "string" ? safeJob.companyLogo : "",
   };
 
   return (
@@ -169,40 +170,41 @@ const JobDetailsPage = () => {
             <div className="flex flex-col md:flex-row items-start gap-6">
               <div className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex items-center justify-center shrink-0">
                 <img
-                  src={job.companyLogo}
-                  alt={job.companyName}
+                  src={safeJob.companyLogo}
+                  alt={safeJob.companyName}
                   className="w-full h-full object-contain"
                 />
               </div>
               <div>
                 <h1 className="text-3xl md:text-5xl font-bold text-[#2d1b4e] mb-2 leading-tight">
-                  {job.title}
+                  {safeJob.title}
                 </h1>
                 <div className="flex flex-wrap items-center gap-4 text-gray-600 text-lg mt-4">
                   <span className="font-bold text-[#2d1b4e] text-xl">
-                    {job.companyName}
+                    {safeJob.companyName}
                   </span>
                   <span className="hidden md:block w-1.5 h-1.5 rounded-full bg-gray-300"></span>
                   <div className="flex items-center gap-1.5">
-                    <MapPin className="w-5 h-5 text-[#ffc12b]" /> {job.location}
+                    <MapPin className="w-5 h-5 text-[#ffc12b]" />{" "}
+                    {safeJob.location}
                   </div>
                   <span className="hidden md:block w-1.5 h-1.5 rounded-full bg-gray-300"></span>
                   <div className="flex items-center gap-1.5">
-                    <Clock className="w-5 h-5 text-[#ffc12b]" /> {job.type}
+                    <Clock className="w-5 h-5 text-[#ffc12b]" /> {safeJob.type}
                   </div>
-                  {job.type !== "Internship" && (
+                  {safeJob.type !== "Internship" && (
                     <>
                       <span className="hidden md:block w-1.5 h-1.5 rounded-full bg-gray-300"></span>
                       <div className="flex items-center gap-1.5 font-bold text-[#2d1b4e] bg-[#ffc12b]/10 px-3 py-1 rounded-full">
                         <DollarSign className="w-4 h-4 text-[#ffc12b]" />{" "}
-                        {job.salary}
+                        {safeJob.salary}
                       </div>
                     </>
                   )}
                 </div>
 
                 <div className="flex flex-wrap gap-2 mt-6">
-                  {job.tags.map((tag, i) => (
+                  {safeJob.tags.map((tag, i) => (
                     <span
                       key={i}
                       className="px-4 py-1.5 bg-white border border-gray-200 rounded-full text-sm font-semibold text-gray-600 shadow-sm"
@@ -229,8 +231,8 @@ const JobDetailsPage = () => {
               </button>
               <Link
                 to={
-                  job.type === "Internship"
-                    ? `/jobs/${id}/payment`
+                  safeJob.type === "Internship"
+                    ? `/internship-application`
                     : `/jobs/${id}/apply`
                 }
                 state={{ jobData: serializableJob }}
@@ -247,32 +249,39 @@ const JobDetailsPage = () => {
       <main className="max-w-7xl w-full mx-auto px-4 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
         {/* LEFT COLUMN (Content) */}
         <div className="lg:col-span-8 space-y-16">
-          <SectionBlock title="Job Overview">{job.overview}</SectionBlock>
-
-          <SectionBlock
-            title="Key Responsibilities"
-            listItems={job.responsibilities}
-          />
-
-          <SectionBlock title="Requirements" listItems={job.requirements} />
-
-          <SectionBlock title="Benefits" listItems={job.benefits} />
-
-          <SectionBlock title={`About ${job.companyName}`}>
-            <p>
-              Hubtel is a leading fintech company in Africa, processing millions
-              of transactions daily. We are dedicated to simplifying payments
-              and connecting businesses with their customers. Our mission is to
-              drive financial inclusion and economic growth across the continent
-              through technology.
-            </p>
+          <SectionBlock title="Job Overview">
+            <div dangerouslySetInnerHTML={{ __html: safeJob.overview }} />
           </SectionBlock>
+
+          {safeJob.responsibilities.length > 0 && (
+            <SectionBlock
+              title="Key Responsibilities"
+              listItems={safeJob.responsibilities}
+            />
+          )}
+
+          {safeJob.requirements.length > 0 && (
+            <SectionBlock
+              title="Requirements"
+              listItems={safeJob.requirements}
+            />
+          )}
+
+          {safeJob.benefits.length > 0 && (
+            <SectionBlock title="Benefits" listItems={safeJob.benefits} />
+          )}
+
+          {safeJob.aboutCompany && (
+            <SectionBlock title={`About ${safeJob.companyName}`}>
+              <div dangerouslySetInnerHTML={{ __html: safeJob.aboutCompany }} />
+            </SectionBlock>
+          )}
         </div>
 
         {/* RIGHT COLUMN (Sticky Card) */}
         <div className="lg:col-span-4 relative hidden lg:block h-full">
           <StickyApplyCard
-            job={job}
+            job={safeJob}
             applicationJobData={serializableJob}
             isSaved={isSaved}
             onSave={handleSave}
@@ -300,9 +309,9 @@ const JobDetailsPage = () => {
           <div className="pt-4">
             <Link
               to={
-                job.type === "Internship"
-                  ? `/jobs/${id}/payment`
-                  : `/jobs/${id}/apply`
+                safeJob.type === "Internship"
+                  ? `/internship-application`
+                  : `/jobs/${safeJob._id || safeJob.id || id}/apply`
               }
               state={{ jobData: serializableJob }}
               className="inline-block bg-[#ffc12b] text-[#2d1b4e] px-12 py-5 rounded-full font-bold text-xl hover:bg-[#ffcd57] transition-all shadow-xl hover:scale-105 hover:shadow-2xl"

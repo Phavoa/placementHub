@@ -6,6 +6,7 @@ import RichTextSection from "./RichTextSection";
 import DynamicListSection from "./DynamicListSection";
 import MetadataPanel from "./MetadataPanel";
 import Navbar from "../Navbar";
+import api from "../../utils/api";
 
 const CreateJobPage = () => {
   const navigate = useNavigate();
@@ -68,14 +69,39 @@ const CreateJobPage = () => {
     }));
   };
 
-  const handlePublish = () => {
-    // Determine status logic (e.g. valid fields)
-    const publishedData = { ...formData, status: "Published" };
-    setFormData(publishedData);
-    alert("Job Published! (Console log for data)");
-    console.log("Published Data:", publishedData);
-    // Optional: Clear draft after publish
-    localStorage.removeItem("jobDraft");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handlePublish = async () => {
+    setIsSubmitting(true);
+    setError(null);
+    console.log(formData);
+    try {
+      // Filter out empty strings from array lists
+      const payload = {
+        ...formData,
+        status: "Published",
+        responsibilities: formData.responsibilities.filter(
+          (i) => i.trim() !== "",
+        ),
+        requirements: formData.requirements.filter((i) => i.trim() !== ""),
+        benefits: formData.benefits.filter((i) => i.trim() !== ""),
+      };
+
+      const response = await api.post("/jobs", payload);
+
+      if (response.status === 201) {
+        alert("Job Published Successfully!");
+        localStorage.removeItem("jobDraft");
+        navigate("/jobs"); // Or wherever you want to redirect
+      }
+    } catch (err) {
+      console.error("Failed to publish job:", err);
+      setError(err.response?.data?.error || "Failed to publish job");
+      alert(err.response?.data?.error || "Failed to publish job");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSaveDraft = () => {

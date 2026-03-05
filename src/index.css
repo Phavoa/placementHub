@@ -16,6 +16,10 @@ body {
   color: #333;
 }
 
+button {
+  cursor: pointer;
+}
+
 nav {
   display: flex;
   flex-direction: row;
@@ -2092,9 +2096,15 @@ select.error {
 
 /* Custom Animations for Job Listings Page */
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .animate-float {
@@ -2121,9 +2131,15 @@ select.error {
   animation: fade-in-up 0.8s ease-out forwards;
 }
 
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
+.delay-100 {
+  animation-delay: 100ms;
+}
+.delay-200 {
+  animation-delay: 200ms;
+}
+.delay-300 {
+  animation-delay: 300ms;
+}
 
 /* Glassmorphism Utilities */
 .glass {
@@ -2132,7 +2148,6 @@ select.error {
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
-
 
 /* Button Shine Animation */
 @keyframes shine {
@@ -2144,4 +2159,3 @@ select.error {
 .animate-shine {
   animation: shine 1s;
 }
-

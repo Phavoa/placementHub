@@ -90,7 +90,7 @@ const JobApplicationPage = () => {
     console.log("Application Submitted:", {
       ...formData,
       resume: resumeFile,
-      jobId: job.id,
+      jobId: job._id || job.id,
     });
     setIsSubmitted(true);
     window.scrollTo(0, 0);

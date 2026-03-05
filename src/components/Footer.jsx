@@ -1,5 +1,6 @@
 import React from "react";
 import { Globe, Monitor, Briefcase, Megaphone } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -30,55 +31,19 @@ const Footer = () => {
           <h4 className="font-bold text-[#2d1b4e] mb-6 text-lg">Company</h4>
           <ul className="space-y-4 text-gray-600">
             <li>
-              <a href="#" className="hover:text-[#2d1b4e]">
+              <a href="/about" className="hover:text-[#2d1b4e]">
                 About Us
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-[#2d1b4e]">
+              <a href="/contact" className="hover:text-[#2d1b4e]">
                 Careers
               </a>
             </li>
-            <li>
-              <a href="#" className="hover:text-[#2d1b4e]">
-                Blog
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-[#2d1b4e]">
-                Pricing
-              </a>
-            </li>
           </ul>
         </div>
 
-        <div>
-          <h4 className="font-bold text-[#2d1b4e] mb-6 text-lg">Resources</h4>
-          <ul className="space-y-4 text-gray-600">
-            <li>
-              <a href="#" className="hover:text-[#2d1b4e]">
-                Templates
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-[#2d1b4e]">
-                Tutorials
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-[#2d1b4e]">
-                Free Resources
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-[#2d1b4e]">
-                Contract Templates
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
+        {/* <div>
           <h4 className="font-bold text-[#2d1b4e] mb-6 text-lg">Legal</h4>
           <ul className="space-y-4 text-gray-600">
             <li>
@@ -102,14 +67,22 @@ const Footer = () => {
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
 
       <div className="max-w-7xl mx-auto pt-8 border-t border-gray-300 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 gap-4">
         <p>© 2026 Placement Plus. All rights reserved.</p>
-        <button className="flex items-center gap-2 hover:text-[#2d1b4e]">
-          Follow Us
-        </button>
+        <div className="flex items-center gap-6">
+          <Link
+            to="/admin/internship"
+            className="hover:text-[#2d1b4e] opacity-50 hover:opacity-100 transition-opacity"
+          >
+            Admin Portal
+          </Link>
+          <button className="flex items-center gap-2 hover:text-[#2d1b4e]">
+            Follow Us
+          </button>
+        </div>
       </div>
     </footer>
   );

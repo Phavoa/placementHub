@@ -1,27 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import JobCard from "./JobCard";
-import Hubtel from "../assets/hubtel.png"; // Reusing mock image
+import { Loader2 } from "lucide-react";
+import api from "../utils/api";
 
 const SimilarJobs = () => {
-  // Mock data for similar jobs
-  const similarJobs = Array(3)
-    .fill({
-      id: 101,
-      companyName: "Hubtel",
-      companyLogo: Hubtel,
-      title: "Product Designer",
-      description:
-        "Join our design team to create amazing user experiences for our fintech products.",
-      location: "Abuja, Nigeria",
-      type: "Full Time",
-      salary: "₦150k - ₦250k/mo",
-      tags: ["Design", "Figma"],
-    })
-    .map((job, i) => ({
-      ...job,
-      id: 101 + i,
-      title: i === 1 ? "UX Researcher" : "Product Designer",
-    }));
+  const [similarJobs, setSimilarJobs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSimilarJobs = async () => {
+      try {
+        const response = await api.get("/jobs?status=Published&limit=3");
+        setSimilarJobs(response.data);
+      } catch (err) {
+        console.error("Failed to fetch similar jobs", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchSimilarJobs();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <section className="py-24 bg-gray-50 flex justify-center">
+        <Loader2 className="w-8 h-8 text-[#2d1b4e] animate-spin" />
+      </section>
+    );
+  }
+
+  if (similarJobs.length === 0) return null;
 
   return (
     <section className="py-24 bg-gray-50 relative">
@@ -42,7 +50,7 @@ const SimilarJobs = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {similarJobs.map((job) => (
-            <JobCard key={job.id} job={job} />
+            <JobCard key={job._id || job.id} job={{ ...job, id: job._id }} />
           ))}
         </div>
       </div>

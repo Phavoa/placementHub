@@ -14,7 +14,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import SmilingMan from "../assets/manSmiling.png";
@@ -71,16 +71,6 @@ const RemoteInternship = () => {
       answer:
         "The duration varies depending on the organization and type of placement, but our structured process is designed to minimize waiting time and ensure candidates start their roles efficiently.",
     },
-    {
-      question: "Is the placement fee refundable?",
-      answer:
-        "Yes, the placement fee is fully refunded if a candidate is not successfully placed.",
-    },
-    {
-      question: "Is the registration fee refundable?",
-      answer:
-        "Yes, the registration fee is a one-time payment that is fully refundable if you have not been successfully placed in a job after 1 month.",
-    },
   ];
 
   const [openFaq, setOpenFaq] = useState(null);
@@ -94,56 +84,17 @@ const RemoteInternship = () => {
     {
       name: "Ayomide",
       role: "Job role",
-      image: "https://i.pravatar.cc/100?img=12",
-      text: "Placement Hub gave me the opportunity I had been hoping for. They directly connected me with a job that suits my skills and career goals perfectly. Their guidance and support throughout the process made everything smooth and stress-free. Thanks to Placement Hub, I now have a role where I can grow professionally and gain real-world experience. I'm truly grateful for their dedication, expertise, and for making my career progress possible.",
+      text: "Placement Hub gave me the opportunity I had been hoping for. They directly connected me with a job that suits my skills and career goals perfectly. Their guidance and support throughout the process made everything smooth and stress-free.",
     },
     {
       name: "Ibrahim",
       role: "Job role",
-      image: "https://i.pravatar.cc/100?img=11",
-      text: "I'm grateful to Placement Hub for connecting me with Big Fix Technologies and guiding me throughout the hiring process. Their steady communication and reassurance made the journey seamless. Their commitment to candidate success genuinely sets them apart.",
+      text: "I'm grateful to Placement Hub for connecting me with Big Fix Technologies and guiding me throughout the hiring process. Their steady communication and reassurance made the journey seamless.",
     },
     {
       name: "Vincent",
       role: "Job role",
-      image: "https://i.pravatar.cc/100?img=56",
-      text: "I'm thrilled to share that Placement Hub played a pivotal role in helping me land a job after a long search! Their team's expertise and dedication made all the difference. With Placement Hub, I finally found a role that is a great fit for me. If you're struggling to find the right opportunity, I highly recommend giving Placement Hub a shot.",
-    },
-    {
-      name: "Chidi",
-      role: "Job role",
-      image: "https://i.pravatar.cc/100?img=13",
-      text: "As an undergraduate, I was worried about my lack of experience. Placement Hub not only found me a suitable internship but also provided training that made me feel confident from day one. I'm now working on real projects and learning every day. Their support is truly unmatched.",
-    },
-    {
-      name: "Fatimah",
-      role: "Job role",
-      image: "https://i.pravatar.cc/100?img=44",
-      text: "The transition from being a student to a professional can be daunting, but Placement Hub made it seamless. They understood my career goals and matched me with a company that aligns perfectly with my values. I highly recommend their program to every fresh graduate.",
-    },
-    {
-      name: "Kofi",
-      role: "Job role",
-      image: "https://i.pravatar.cc/100?img=3",
-      text: "Placement Hub connected me with a remote role that allows me to work with an international team. The exposure I've gotten so far is incredible. Their interview prep was a game-changer for me. Truly grateful for this opportunity!",
-    },
-    {
-      name: "Blessing",
-      role: "Job role",
-      image: "https://i.pravatar.cc/100?img=5",
-      text: "I was struggling to find a job after my NYSC until I found Placement Hub. They helped me refine my CV and prepared me for interviews. Within three weeks, I was placed in a role that fits my background. Their team is professional and result-oriented.",
-    },
-    {
-      name: "Emmanuel",
-      role: "Job role",
-      image: "https://i.pravatar.cc/100?img=8",
-      text: "What I love about Placement Hub is their personalized approach. They don't just find you a job; they find you the *right* job. The mentoring I received has been invaluable to my career growth. I'm now much more confident in my skills.",
-    },
-    {
-      name: "Ngozi",
-      role: "Job role",
-      image: "https://i.pravatar.cc/100?img=10",
-      text: "Placement Hub's program is well-structured and highly effective. From registration to placement, the process was transparent and smooth. I'm now working in a role where I'm constantly challenged and empowered. Thank you, Placement Hub!",
+      text: "With Placement Hub, I finally found a role that is a great fit for me. If you're struggling to find the right opportunity, I highly recommend giving Placement Hub a shot.",
     },
   ];
 
@@ -181,7 +132,7 @@ const RemoteInternship = () => {
                 to kickstart your career. Gain experience, network, and grow.
               </p>
               <button
-                onClick={() => navigate("/internship-payment")}
+                onClick={() => navigate("/internship-application")}
                 className="bg-[#2d1b4e] text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-purple-900 transition-all shadow-xl hover:shadow-2xl  hover:-translate-y-1"
               >
                 Apply Now
@@ -217,7 +168,7 @@ const RemoteInternship = () => {
                     <p className="text-sm text-gray-500">
                       The company seeks to employ the services of
                       a.....................
-                      <span className="text-[#3E1D67] font-bold">
+                      <span className="text-[#3E1D67] font-bold cursor-pointer">
                         Read More
                       </span>
                     </p>
@@ -346,15 +297,15 @@ const RemoteInternship = () => {
                   Get started
                 </p>
                 <p className="text-white/80 max-w-xs mx-auto leading-relaxed">
-                  The placement fee covers the recruitment process, and it’s
-                  fully refundable if a candidate is not successfully placed
+                  The placement fee covers the recruitment process and
+                  administrative costs associated with your placement
                 </p>
               </div>
             </div>
           </div>
 
           <button
-            onClick={() => navigate("/jobs")}
+            onClick={() => navigate("/internship-application")}
             className="mt-20 bg-[#ffc12b] text-[#2d1b4e] px-12 py-4 rounded-xl font-bold text-lg hover:bg-[#ffcd57] transition-all hover:scale-105 shadow-lg"
           >
             Get started
@@ -381,15 +332,15 @@ const RemoteInternship = () => {
           <div className="space-y-6">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                "IT Internships",
-                "HR Internship",
-                "Accounting Internship",
-                "Project Assistant",
-                "Sales Internship",
-                "Admin Assistant",
-                "Technical Assistant",
-                "Customer Care Internship",
-                "Data Entry Internship",
+                "Tech & IT Internships",
+                "Business Internships",
+                "Finance & Accounting Internships",
+                "Administrative & Office Internships",
+                "Marketing & Media Internships",
+                "Healthcare Internships",
+                "Legal & Compliance Internships",
+                "Logistics & Supply Chain Internships",
+                "Engineering & Technical Internships",
               ].map((role, idx) => (
                 <div
                   key={idx}
@@ -406,27 +357,6 @@ const RemoteInternship = () => {
                   </span>
                 </div>
               ))}
-            </div>
-
-            <div className="flex flex-col md:flex-row justify-center gap-6">
-              {["Digital Marketing Internship", "Pharmacy Assistant"].map(
-                (role, idx) => (
-                  <div
-                    key={idx}
-                    onClick={() =>
-                      navigate(`/jobs?category=${role.split(" ")[0]}`)
-                    }
-                    className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex items-center gap-4 group cursor-pointer w-full md:w-auto md:min-w-[350px]"
-                  >
-                    <div className="bg-[#F3F0F9] p-3 rounded-lg text-[#2d1b4e] group-hover:bg-[#2d1b4e] group-hover:text-white transition-colors">
-                      <Briefcase className="w-6 h-6" />
-                    </div>
-                    <span className="font-bold text-gray-800 text-lg">
-                      {role}
-                    </span>
-                  </div>
-                ),
-              )}
             </div>
           </div>
         </div>
@@ -446,15 +376,11 @@ const RemoteInternship = () => {
           {/* Bottom Block */}
           <div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <button
-                onClick={() => navigate("/internship-payment")}
-                className="bg-[#FFC12B] text-[#2d1b4e] font-bold px-8 py-3 rounded-xl hover:bg-[#ffcd57] transition-all w-full sm:w-auto min-w-[160px]"
-              >
-                Apply now
-              </button>
-              <button className="bg-transparent border border-[#FFC12B] text-[#FFC12B] font-bold px-8 py-3 rounded-xl hover:bg-[#FFC12B]/10 transition-all w-full sm:w-auto min-w-[160px]">
-                Book a Call
-              </button>
+              <Link to="/contact">
+                <button className="bg-transparent border border-[#FFC12B] text-[#FFC12B] font-bold px-8 py-3 rounded-xl hover:bg-[#FFC12B]/10 transition-all w-full sm:w-auto min-w-[160px] cursor-pointer">
+                  Book a Call
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -468,7 +394,7 @@ const RemoteInternship = () => {
               What people are saying about us
             </h2>
             <p className="text-gray-500 text-lg">
-              See what others are saying about our services
+              See what interns are saying about our services
             </p>
           </div>
 
@@ -483,14 +409,9 @@ const RemoteInternship = () => {
                 {testimonials.map((t, idx) => (
                   <div
                     key={idx}
-                    className="bg-[#F9FAFB] p-8 rounded-[2.5rem] flex-shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex flex-col h-full"
+                    className="bg-[#F9FAFB] p-8 rounded-[2.5rem] shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex flex-col h-full"
                   >
                     <div className="flex items-center gap-4 mb-8">
-                      <img
-                        src={t.image}
-                        alt={t.name}
-                        className="w-14 h-14 rounded-full object-cover"
-                      />
                       <div>
                         <h4 className="font-bold text-xl text-[#2d1b4e]">
                           {t.name}
@@ -506,21 +427,19 @@ const RemoteInternship = () => {
               </div>
             </div>
 
-            {/* Navigation Arrows */}
-            <div className="flex justify-end gap-4 mt-8">
-              <button
-                onClick={prevSlide}
-                className="w-12 h-12 rounded-full bg-[#2d1b4e] text-white flex items-center justify-center hover:bg-purple-900 transition-colors shadow-lg z-10"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="w-12 h-12 rounded-full bg-[#2d1b4e] text-white flex items-center justify-center hover:bg-purple-900 transition-colors shadow-lg z-10"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-            </div>
+            {/* Navigation Arrows on sides */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#2d1b4e] text-white flex items-center justify-center hover:bg-purple-900 transition-colors shadow-lg z-10"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-12 h-12 rounded-full bg-[#2d1b4e] text-white flex items-center justify-center hover:bg-purple-900 transition-colors shadow-lg z-10"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
           </div>
         </div>
       </section>
@@ -585,16 +504,12 @@ const RemoteInternship = () => {
             <h4 className="font-bold text-2xl text-[#2d1b4e] mb-2">
               Not sure if you qualify?
             </h4>
-            <p className="text-gray-500 text-lg">
-              Contact our admissions team and we'll help you determine the best
-              program for your situation.
-            </p>
           </div>
           <button
-            onClick={() => navigate("/jobs")}
+            onClick={() => navigate("/contact")}
             className="bg-[#ffc12b] text-[#2d1b4e] px-10 py-5 rounded-2xl font-bold hover:bg-[#ffcd57] transition-all shadow-sm whitespace-nowrap text-lg"
           >
-            Get started
+            Contact Us
           </button>
         </div>
       </section>
@@ -689,7 +604,7 @@ const RemoteInternship = () => {
               </h3>
 
               <button
-                onClick={() => navigate("/internship-payment")}
+                onClick={() => navigate("/internship-application")}
                 className="bg-[#ffc12b] text-[#2d1b4e] px-10 py-3 rounded-lg font-bold hover:bg-[#ffcd57] transition-all shadow-lg"
               >
                 Apply Now
@@ -724,9 +639,9 @@ const RemoteInternship = () => {
                     {faq.question}
                   </span>
                   {openFaq === idx ? (
-                    <ChevronUp className="w-6 h-6 text-[#2d1b4e] flex-shrink-0 mt-1" />
+                    <ChevronUp className="w-6 h-6 text-[#2d1b4e] shrink-0 mt-1" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-gray-400 flex-shrink-0 mt-1" />
+                    <ChevronDown className="w-6 h-6 text-gray-400 shrink-0 mt-1" />
                   )}
                 </button>
                 <div
@@ -755,7 +670,7 @@ const RemoteInternship = () => {
             </h2>
 
             <button
-              onClick={() => navigate("/internship-payment")}
+              onClick={() => navigate("/internship-application")}
               className="bg-[#ffc12b] text-[#2d1b4e] px-12 py-5 rounded-full font-bold text-xl hover:bg-yellow-400 shadow-xl transition-transform hover:scale-105"
             >
               Join now

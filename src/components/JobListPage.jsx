@@ -1,59 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "./Navbar";
-import Footer from "./Footer"; // Assuming Footer is exported as default from Footer.jsx based on index.css analysis, but file list showed Footer.jsx exists.
+import Footer from "./Footer";
 import JobCard from "./JobCard";
 import FiltersBar from "./FiltersBar";
-import { Search, SlidersHorizontal, ArrowDown, XCircle } from "lucide-react";
-import Hubtel from "../assets/hubtel.png"; // Reusing for mock data
+import { Search, ArrowDown, XCircle, Loader2 } from "lucide-react";
+import api from "../utils/api";
 
 const JobListPage = () => {
   const [searchParams] = useSearchParams();
-  const categoryFilter = searchParams.get("category");
+  const initialCategory = searchParams.get("category") || "";
 
-  // Mock Data
-  const mockJobs = Array(12)
-    .fill({
-      id: 1,
-      companyName: "Hubtel",
-      companyLogo: Hubtel,
-      title: "Senior Product Designer",
-      description:
-        "We are looking for an experienced Product Designer to join our team and help shape the future of our financial products.",
-      location: "Accra, Ghana",
-      type: "Full Time",
-      salary: "₦150k - ₦250k/mo",
-      tags: ["Design", "UI/UX", "Figma"],
-    })
-    .map((job, i) => {
-      const isIntern = i % 4 === 3;
-      return {
-        ...job,
-        id: i + 1,
-        title: isIntern
-          ? "Software Engineering Intern"
-          : i % 2 === 0
-            ? "Senior Product Designer"
-            : "Frontend Developer",
-        type: isIntern ? "Internship" : "Full Time",
-        location:
-          i % 3 === 0
-            ? "Lagos, Nigeria"
-            : i % 3 === 1
-              ? "Abuja, Nigeria"
-              : "Port Harcourt, Nigeria",
-      };
-    });
+  // Filter States
+  const [searchQuery, setSearchQuery] = useState(initialCategory);
+  const [locationFilter, setLocationFilter] = useState("");
+  const [typeFilter, setTypeFilter] = useState("");
+  const [sortOption, setSortOption] = useState("newest");
 
-  const filteredJobs = categoryFilter
-    ? mockJobs.filter(
-        (job) =>
-          job.title.toLowerCase().includes(categoryFilter.toLowerCase()) ||
-          job.tags.some((tag) =>
-            tag.toLowerCase().includes(categoryFilter.toLowerCase()),
-          ),
-      )
-    : mockJobs;
+  // Data States
+  const [jobs, setJobs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchJobs = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const params = new URLSearchParams({ status: "Published" });
+      if (searchQuery) params.append("search", searchQuery);
+      if (locationFilter) params.append("location", locationFilter);
+      if (typeFilter) params.append("type", typeFilter);
+      if (sortOption) params.append("sort", sortOption);
+
+      const response = await api.get(`/jobs?${params.toString()}`);
+      setJobs(response.data);
+    } catch (err) {
+      console.error("Failed to fetch jobs:", err);
+      setError("Failed to load jobs. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
+  }, [searchQuery, locationFilter, typeFilter, sortOption]);
+
+  // Re-fetch whenever any filter, sort, or search changes (fetchJobs is the single dep)
+  useEffect(() => {
+    fetchJobs();
+    window.scrollTo(0, 0);
+  }, [fetchJobs]);
+
+  // Clear all filters and directly fetch with reset params (avoids stale-state race condition)
+  const handleClearFilters = async () => {
+    setSearchQuery("");
+    setLocationFilter("");
+    setTypeFilter("");
+    setSortOption("newest");
+    // State setters are async — fetch directly with explicit empty params
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await api.get("/jobs?status=Published&sort=newest");
+      setJobs(response.data);
+    } catch (err) {
+      console.error("Failed to fetch jobs:", err);
+      setError("Failed to load jobs. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="font-['Outfit'] bg-gray-50 text-gray-900 overflow-x-hidden min-h-screen flex flex-col">
@@ -74,8 +87,8 @@ const JobListPage = () => {
             Explore <span className="text-[#ffc12b]">Opportunities</span>
           </h1>
           <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-200">
-            Find your dream job, internship, or placement with top companies.
-            Curated roles for every stage of your career.
+            Find your dream internship, placement, or career-starting role with
+            top companies. Curated roles for every stage of your career.
           </p>
         </div>
       </section>
@@ -85,15 +98,26 @@ const JobListPage = () => {
         <div className="max-w-7xl mx-auto space-y-12">
           {/* Filters Component - Sticky & Glassmorphic */}
           <div className="sticky top-4 z-50 backdrop-blur-md bg-white/70 rounded-[2rem] shadow-lg border border-white/20 transition-all duration-300">
-            <FiltersBar />
+            <FiltersBar
+              search={searchQuery}
+              setSearch={setSearchQuery}
+              location={locationFilter}
+              setLocation={setLocationFilter}
+              type={typeFilter}
+              setType={setTypeFilter}
+              onSearch={fetchJobs}
+            />
           </div>
 
           {/* Results Header */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-gray-200 pb-6">
             <div>
-              <h2 className="text-2xl font-bold text-[#2d1b4e]">Latest Jobs</h2>
+              <h2 className="text-2xl font-bold text-[#2d1b4e]">
+                Latest Positions
+              </h2>
               <p className="text-gray-500 text-sm mt-1">
-                Showing <span className="font-bold text-[#2d1b4e]">24</span>{" "}
+                Showing{" "}
+                <span className="font-bold text-[#2d1b4e]">{jobs.length}</span>{" "}
                 available positions
               </p>
             </div>
@@ -103,10 +127,15 @@ const JobListPage = () => {
                 Sort by:
               </span>
               <div className="relative group">
-                <select className="appearance-none bg-white border border-gray-200 text-gray-700 py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:border-[#2d1b4e] cursor-pointer font-medium">
-                  <option>Newest</option>
-                  <option>Relevance</option>
-                  <option>Salary: High to Low</option>
+                <select
+                  value={sortOption}
+                  onChange={(e) => setSortOption(e.target.value)}
+                  className="appearance-none bg-white border border-gray-200 text-gray-700 py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:border-[#2d1b4e] cursor-pointer font-medium"
+                >
+                  <option value="newest">Newest</option>
+                  <option value="oldest">Oldest</option>
+                  <option value="salary_high">Salary: High to Low</option>
+                  <option value="salary_low">Salary: Low to High</option>
                 </select>
                 <ArrowDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
               </div>
@@ -114,38 +143,64 @@ const JobListPage = () => {
           </div>
 
           {/* Job Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredJobs.map((job, index) => (
-              <div
-                key={job.id}
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <JobCard job={job} />
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center py-20">
+              <Loader2 className="w-12 h-12 text-[#2d1b4e] animate-spin mb-4" />
+              <p className="text-gray-500 font-medium">
+                Loading opportunities...
+              </p>
+            </div>
+          ) : error ? (
+            <div className="text-center py-20 flex flex-col items-center">
+              <div className="bg-red-50 p-6 rounded-full mb-6 text-red-500">
+                <XCircle className="w-12 h-12" />
               </div>
-            ))}
-          </div>
-
-          {/* Empty State (Hidden by default for now, can be conditionally rendered) */}
-          {/* 
-             <div className="text-center py-20 flex flex-col items-center">
-                <div className="bg-gray-100 p-6 rounded-full mb-6">
-                    <Search className="w-12 h-12 text-gray-400" />
+              <h3 className="text-2xl font-bold text-[#2d1b4e] mb-2">
+                Oops! Something went wrong
+              </h3>
+              <p className="text-gray-500 max-w-md mx-auto mb-8">{error}</p>
+            </div>
+          ) : jobs.length === 0 ? (
+            <div className="text-center py-20 flex flex-col items-center">
+              <div className="bg-gray-100 p-6 rounded-full mb-6">
+                <Search className="w-12 h-12 text-gray-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-[#2d1b4e] mb-2">
+                No opportunities found
+              </h3>
+              <p className="text-gray-500 max-w-md mx-auto mb-8">
+                We couldn't find any opportunities matching your current
+                filters. Try adjusting your search criteria.
+              </p>
+              <button
+                onClick={handleClearFilters}
+                className="text-[#2d1b4e] font-bold flex items-center gap-2 hover:underline"
+              >
+                <XCircle className="w-5 h-5" /> Clear filters
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {jobs.map((job, index) => (
+                <div
+                  key={job._id || job.id}
+                  className="animate-fade-in-up"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <JobCard job={{ ...job, id: job._id }} />
                 </div>
-                <h3 className="text-2xl font-bold text-[#2d1b4e] mb-2">No jobs found</h3>
-                <p className="text-gray-500 max-w-md mx-auto mb-8">We couldn't find any jobs matching your current filters. Try adjusting your search criteria.</p>
-                <button className="text-[#2d1b4e] font-bold flex items-center gap-2 hover:underline">
-                    <XCircle className="w-5 h-5" /> Clear all filters
-                </button>
-             </div>
-             */}
+              ))}
+            </div>
+          )}
 
           {/* Pagination / Load More */}
-          <div className="flex justify-center pt-8">
-            <button className="bg-white border-2 border-[#2d1b4e]/10 text-[#2d1b4e] px-10 py-3 rounded-full font-bold hover:bg-[#2d1b4e] hover:text-white transition-all shadow-sm hover:shadow-lg">
-              Load More Jobs
-            </button>
-          </div>
+          {jobs.length > 0 && (
+            <div className="flex justify-center pt-8">
+              <button className="bg-white border-2 border-[#2d1b4e]/10 text-[#2d1b4e] px-10 py-3 rounded-full font-bold hover:bg-[#2d1b4e] hover:text-white transition-all shadow-sm hover:shadow-lg">
+                Load More Opportunities
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -171,7 +226,6 @@ const JobListPage = () => {
         </div>
       </section>
 
-      {/* Reuse existingFooter - Assuming one exists or placeholder */}
       <Footer />
     </div>
   );
