@@ -3,6 +3,7 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import internshipRoutes from "./routes/internshipRoutes.js";
+import jobRoutes from "./routes/jobRoutes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,6 +19,7 @@ app.use("/uploads", express.static("uploads"));
 
 // API Routes
 app.use("/api/internship", internshipRoutes);
+app.use("/api/jobs", jobRoutes);
 
 app.get("/health", (req, res) => {
   res.json({
