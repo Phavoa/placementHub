@@ -5,7 +5,7 @@ const MetadataPanel = ({ formData, handleChange, onPublish, onSaveDraft }) => {
   return (
     <div className="space-y-6 sticky top-24">
       {/* Visual Preview / Status Card */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-6">
         <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6">
           Publishing Actions
         </h3>
@@ -31,7 +31,7 @@ const MetadataPanel = ({ formData, handleChange, onPublish, onSaveDraft }) => {
           onClick={onPublish}
           className="w-full bg-[#ffc12b] text-[#2d1b4e] font-bold py-4 rounded-xl hover:bg-[#ffcd57] transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 mb-3"
         >
-          Publish Job
+          Publish Internship
         </button>
         <button
           onClick={onSaveDraft}
@@ -42,9 +42,9 @@ const MetadataPanel = ({ formData, handleChange, onPublish, onSaveDraft }) => {
       </div>
 
       {/* Metadata Fields */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-6 space-y-6">
         <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">
-          Job Metadata
+          Internship Setup
         </h3>
 
         {/* Featured Toggle */}
@@ -67,7 +67,9 @@ const MetadataPanel = ({ formData, handleChange, onPublish, onSaveDraft }) => {
               <Hash className="w-5 h-5" />
             </div>
             <div>
-              <p className="font-bold text-gray-800 text-sm">Featured Job</p>
+              <p className="font-bold text-gray-800 text-sm">
+                Featured Internship
+              </p>
               <p className="text-xs text-gray-400">Pin to top of lists</p>
             </div>
           </div>
@@ -119,13 +121,14 @@ const MetadataPanel = ({ formData, handleChange, onPublish, onSaveDraft }) => {
             Application Deadline
           </label>
           <div className="relative">
-            <CalendarIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <CalendarIcon className="absolute w-4 h-4 text-gray-400" style={{ left: "12px", top: "50%", transform: "translateY(-50%)" }} />
             <input
               type="date"
               name="deadline"
               value={formData.deadline}
               onChange={handleChange}
-              className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-medium text-gray-700 outline-none focus:bg-white focus:border-[#2d1b4e] transition-all"
+              className="w-full pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-medium text-gray-700 outline-none focus:bg-white focus:border-[#2d1b4e] transition-all"
+              style={{ paddingLeft: "36px" }}
             />
           </div>
         </div>

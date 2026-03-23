@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import AdminNavbar from "./admin/AdminNavbar";
 import {
   Users,
   Search,
   Filter,
   Eye,
   CheckCircle,
-  XCircle,
-  Trash2,
-  Download,
   MoreVertical,
   ChevronDown,
   Mail,
@@ -107,11 +103,8 @@ const InternshipDashboard = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "accepted":
-        return "bg-green-100 text-green-700 border-green-200";
-      case "rejected":
-        return "bg-red-100 text-red-700 border-red-200";
       case "reviewed":
+        return "bg-blue-100 text-blue-700 border-blue-200";
         return "bg-blue-100 text-blue-700 border-blue-200";
       case "interview_scheduled":
         return "bg-purple-100 text-purple-700 border-purple-200";
@@ -127,9 +120,9 @@ const InternshipDashboard = () => {
 
   return (
     <div className="font-['Outfit'] bg-[#FDFDFD] min-h-screen flex flex-col">
-      <Navbar />
+      <AdminNavbar />
 
-      <main className="grow pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+      <main className="grow pt-[-32] md:pt-4 pb-24 px-4 sm:px-6 lg:px-8 mt-24">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
@@ -169,18 +162,11 @@ const InternshipDashboard = () => {
                 color: "bg-yellow-50 text-yellow-600",
               },
               {
-                label: "Accepted",
-                value: applications.filter((a) => a.status === "accepted")
+                label: "Reviewed",
+                value: applications.filter((a) => a.status === "reviewed")
                   .length,
                 icon: CheckCircle,
                 color: "bg-green-50 text-green-600",
-              },
-              {
-                label: "Rejected",
-                value: applications.filter((a) => a.status === "rejected")
-                  .length,
-                icon: XCircle,
-                color: "bg-red-50 text-red-600",
               },
               {
                 label: "Interviews",
@@ -236,8 +222,6 @@ const InternshipDashboard = () => {
                   <option value="pending">Pending</option>
                   <option value="reviewed">Reviewed</option>
                   <option value="interview_scheduled">Interviewing</option>
-                  <option value="accepted">Accepted</option>
-                  <option value="rejected">Rejected</option>
                 </select>
                 <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 pointer-events-none" />
               </div>
@@ -350,36 +334,19 @@ const InternshipDashboard = () => {
                             </button>
                             <button
                               onClick={() =>
-                                handleStatusUpdate(app._id, "accepted")
+                                handleStatusUpdate(app._id, "reviewed")
                               }
-                              className="p-2.5 text-gray-400 hover:text-green-600 hover:bg-white rounded-xl transition-all shadow-sm border border-transparent hover:border-gray-100 disabled:opacity-50"
+                              className="p-2.5 text-gray-400 hover:text-blue-600 hover:bg-white rounded-xl transition-all shadow-sm border border-transparent hover:border-gray-100 disabled:opacity-50"
                               disabled={
                                 actionLoading === app._id ||
-                                app.status === "accepted"
+                                app.status === "reviewed"
                               }
-                              title="Accept"
+                              title="Review"
                             >
                               {actionLoading === app._id ? (
                                 <Loader2 className="w-5 h-5 animate-spin" />
                               ) : (
                                 <CheckCircle className="w-5 h-5" />
-                              )}
-                            </button>
-                            <button
-                              onClick={() =>
-                                handleStatusUpdate(app._id, "rejected")
-                              }
-                              className="p-2.5 text-gray-400 hover:text-red-600 hover:bg-white rounded-xl transition-all shadow-sm border border-transparent hover:border-gray-100 disabled:opacity-50"
-                              disabled={
-                                actionLoading === app._id ||
-                                app.status === "rejected"
-                              }
-                              title="Reject"
-                            >
-                              {actionLoading === app._id ? (
-                                <Loader2 className="w-5 h-5 animate-spin" />
-                              ) : (
-                                <XCircle className="w-5 h-5" />
                               )}
                             </button>
                           </div>
@@ -409,7 +376,7 @@ const InternshipDashboard = () => {
                 onClick={() => setIsModalOpen(false)}
                 className="absolute top-8 right-8 text-white/60 hover:text-white transition-colors"
               >
-                <XCircle className="w-8 h-8" />
+                Close
               </button>
               <div className="flex items-center gap-6">
                 <div className="w-20 h-20 bg-[#ffc12b] text-[#2d1b4e] rounded-3xl flex items-center justify-center font-black text-3xl shadow-lg">
@@ -541,29 +508,18 @@ const InternshipDashboard = () => {
               <div className="flex gap-4">
                 <button
                   onClick={() =>
-                    handleStatusUpdate(selectedApp._id, "rejected")
-                  }
-                  className="px-8 py-3.5 rounded-xl font-bold bg-white text-gray-600 border border-gray-200 hover:bg-red-50 hover:text-red-600 hover:border-red-100 transition-all shadow-sm"
-                  disabled={selectedApp.status === "rejected"}
-                >
-                  Reject
-                </button>
-                <button
-                  onClick={() =>
-                    handleStatusUpdate(selectedApp._id, "accepted")
+                    handleStatusUpdate(selectedApp._id, "reviewed")
                   }
                   className="px-8 py-3.5 rounded-xl font-bold bg-[#ffc12b] text-[#2d1b4e] hover:bg-[#ffb000] transition-all shadow-lg hover:shadow-xl"
-                  disabled={selectedApp.status === "accepted"}
+                  disabled={selectedApp.status === "reviewed"}
                 >
-                  Accept Applicant
+                  Mark as Reviewed
                 </button>
               </div>
             </div>
           </div>
         </div>
       )}
-
-      <Footer />
 
       <style
         dangerouslySetInnerHTML={{

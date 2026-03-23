@@ -14,7 +14,6 @@ const ContactUs = () => {
     user_name: "",
     user_email: "",
     user_phone: "",
-    selected_course: "",
     message: "",
   });
 
@@ -42,7 +41,6 @@ const ContactUs = () => {
     if (selectedCourse) {
       setFormData((prevData) => ({
         ...prevData,
-        selected_course: selectedCourse,
         message: `I am interested in enrolling in the ${selectedCourse} course. Please provide me with more information about enrollment requirements, schedule, and fees.`,
       }));
     }
@@ -70,9 +68,7 @@ const ContactUs = () => {
       newErrors.user_phone = "Phone number is invalid";
     }
 
-    if (!formData.selected_course) {
-      newErrors.selected_course = "Please select a course";
-    }
+
 
     if (!formData.message.trim()) {
       newErrors.message = "Message is required";
@@ -135,10 +131,9 @@ const ContactUs = () => {
             Name: formData.user_name,
             Email: formData.user_email,
             Phone: formData.user_phone,
-            Course: formData.selected_course,
             Message: formData.message,
           }),
-        }
+        },
       );
       if (apiResponse.ok) {
         apiSuccess = true;
@@ -154,22 +149,20 @@ const ContactUs = () => {
         user_name: formData.user_name,
         user_email: formData.user_email,
         user_phone: formData.user_phone,
-        selected_course: formData.selected_course,
         message: formData.message,
         request_type: isEnrollment ? "enrollment" : "general",
-        course_title: selectedCourse || formData.selected_course,
         // PRIMARY RECIPIENT - This will be the main "To" field in your EmailJS template
         to_email: EMAILJS_CONFIG.recipients[0], // First recipient as primary
         // ALL RECIPIENTS - Comma-separated list for templates that support multiple recipients
         to_emails: EMAILJS_CONFIG.recipients.join(
-          EMAILJS_CONFIG.recipientSeparator
+          EMAILJS_CONFIG.recipientSeparator,
         ),
         // INDIVIDUAL RECIPIENTS - For maximum compatibility, send to each recipient separately
         recipient_1: EMAILJS_CONFIG.recipients[0],
         recipient_2: EMAILJS_CONFIG.recipients[1] || "",
         recipient_3: EMAILJS_CONFIG.recipients[2] || "",
-        // Email subject with course context
-        subject: `${isEnrollment ? "Enrollment Request" : "Contact Form"} - ${formData.selected_course || "General Inquiry"}`,
+        // Email subject with context
+        subject: `${isEnrollment ? `Enrollment Request - ${selectedCourse}` : "Contact Form Inquiry"}`,
         // Timestamp for tracking
         submission_time: new Date().toISOString(),
       };
@@ -181,7 +174,7 @@ const ContactUs = () => {
         EMAILJS_CONFIG.serviceId,
         EMAILJS_CONFIG.templateId,
         emailData,
-        EMAILJS_CONFIG.publicKey
+        EMAILJS_CONFIG.publicKey,
       );
 
       emailSuccess = true;
@@ -198,7 +191,6 @@ const ContactUs = () => {
         user_name: "",
         user_email: "",
         user_phone: "",
-        selected_course: "",
         message: "",
       });
       // Clear navigation state to prevent re-population on page refresh
@@ -222,14 +214,7 @@ const ContactUs = () => {
     navigate("/courses");
   };
 
-  // Course options for the dropdown
-  const courseOptions = [
-    "Ethical Hacking & Cyber Security",
-    "Data Analysis",
-    "Full Stack",
-    "DevOps & System Administration",
-    "AI Integration For Professionals",
-  ];
+
 
   return (
     <>
@@ -239,7 +224,7 @@ const ContactUs = () => {
           <h2>
             {isEnrollment
               ? `Enroll in ${selectedCourse}`
-              : "Contact Us for Application"}
+              : "We'd Love to Hear From You."}
           </h2>
           {isEnrollment && (
             <p className="enrollment-subtitle">
@@ -307,7 +292,7 @@ const ContactUs = () => {
                   value={formData.user_phone}
                   onChange={handleInputChange}
                   className={errors.user_phone ? "error" : ""}
-                  placeholder="+1 (555) 123-4567"
+                  placeholder="+234 812 345 6789"
                   required
                 />
                 {errors.user_phone && (
@@ -315,28 +300,6 @@ const ContactUs = () => {
                 )}
               </label>
 
-              <label>
-                Course Selection *
-                <select
-                  name="selected_course"
-                  value={formData.selected_course}
-                  onChange={handleInputChange}
-                  className={errors.selected_course ? "error" : ""}
-                  required
-                >
-                  <option value="">Select a course</option>
-                  {courseOptions.map((course) => (
-                    <option key={course} value={course}>
-                      {course}
-                    </option>
-                  ))}
-                </select>
-                {errors.selected_course && (
-                  <span className="error-message">
-                    {errors.selected_course}
-                  </span>
-                )}
-              </label>
             </div>
 
             <label>
@@ -347,7 +310,7 @@ const ContactUs = () => {
                 onChange={handleInputChange}
                 className={errors.message ? "error" : ""}
                 rows="4"
-                placeholder="Tell us about your background, experience, and why you're interested in this course..."
+                placeholder="Tell us how we can help you."
                 required
               />
               {errors.message && (
@@ -361,9 +324,7 @@ const ContactUs = () => {
               name="request_type"
               value={isEnrollment ? "enrollment" : "general"}
             />
-            {selectedCourse && (
-              <input type="hidden" name="course_title" value={selectedCourse} />
-            )}
+
 
             {errors.submit && (
               <div className="submit-error">{errors.submit}</div>

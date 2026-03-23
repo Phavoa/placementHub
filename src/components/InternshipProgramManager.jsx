@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import AdminNavbar from "./admin/AdminNavbar";
 import {
   Plus,
   Trash2,
@@ -87,10 +86,16 @@ const InternshipProgramManager = () => {
     }
   };
 
+  const uniqueCategories = [
+    ...new Set(
+      programs.map((p) => p.category).filter((c) => c && c.trim() !== ""),
+    ),
+  ].sort();
+
   return (
     <div className="font-['Outfit'] bg-gray-50 min-h-screen flex flex-col">
-      <Navbar />
-      <main className="grow pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+      <AdminNavbar />
+      <main className="grow pt-[-32] md:pt-4 pb-24 px-4 sm:px-6 lg:px-8 mt-24">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-10">
             <div>
@@ -140,8 +145,14 @@ const InternshipProgramManager = () => {
                         })
                       }
                       placeholder="e.g. Creative"
+                      list="category-suggestions"
                       className="w-full p-4 rounded-xl bg-gray-50 border border-gray-100 focus:outline-none focus:ring-4 focus:ring-yellow-500/5 focus:border-[#ffc12b] transition-all"
                     />
+                    <datalist id="category-suggestions">
+                      {uniqueCategories.map((cat) => (
+                        <option key={cat} value={cat} />
+                      ))}
+                    </datalist>
                   </div>
                   <button
                     type="submit"
@@ -215,7 +226,6 @@ const InternshipProgramManager = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

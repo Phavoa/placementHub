@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import AdminNavbar from "./admin/AdminNavbar";
 import {
   ArrowLeft,
   Mail,
@@ -10,9 +9,6 @@ import {
   FileText,
   Download,
   Clock,
-  CheckCircle,
-  XCircle,
-  AlertCircle,
   Loader2,
   Save,
   Trash2,
@@ -105,7 +101,6 @@ const InternshipApplicationDetail = () => {
             </p>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
@@ -113,8 +108,8 @@ const InternshipApplicationDetail = () => {
   if (error || !application) {
     return (
       <div className="font-['Outfit'] bg-gray-50 min-h-screen flex flex-col">
-        <Navbar />
-        <main className="grow flex items-center justify-center p-4">
+        <AdminNavbar />
+        <main className="grow flex items-center justify-center p-4 mt-20">
           <div className="max-w-md w-full bg-white p-12 rounded-[2.5rem] shadow-xl text-center">
             <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-6" />
             <h2 className="text-2xl font-bold text-[#2d1b4e] mb-4">Oops!</h2>
@@ -129,25 +124,12 @@ const InternshipApplicationDetail = () => {
             </Link>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
 
   const getStatusDisplay = (s) => {
     switch (s) {
-      case "accepted":
-        return {
-          color: "bg-green-100 text-green-700 border-green-200",
-          icon: CheckCircle,
-          label: "Accepted",
-        };
-      case "rejected":
-        return {
-          color: "bg-red-100 text-red-700 border-red-200",
-          icon: XCircle,
-          label: "Rejected",
-        };
       case "interview_scheduled":
         return {
           color: "bg-purple-100 text-purple-700 border-purple-200",
@@ -173,9 +155,9 @@ const InternshipApplicationDetail = () => {
 
   return (
     <div className="font-['Outfit'] bg-[#FDFDFD] min-h-screen flex flex-col">
-      <Navbar />
+      <AdminNavbar />
 
-      <main className="grow pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+      <main className="grow pt-[-32] md:pt-4 pb-24 px-4 sm:px-6 lg:px-8 mt-24">
         <div className="max-w-5xl mx-auto">
           {/* Navigation & Actions */}
           <div className="flex flex-wrap items-center justify-between gap-4 mb-10">
@@ -378,34 +360,12 @@ const InternshipApplicationDetail = () => {
 
                 <div className="space-y-4">
                   <button
-                    onClick={() => handleUpdate("accepted")}
-                    disabled={isSaving || status === "accepted"}
-                    className={`w-full p-5 rounded-2xl border-2 flex items-center justify-between font-bold transition-all ${status === "accepted" ? "bg-green-50 border-green-500 text-green-700" : "bg-white border-gray-100 text-gray-600 hover:border-green-200 hover:bg-green-50/30"}`}
-                  >
-                    Accept Candidate
-                    {status === "accepted" ? (
-                      <CheckCircle className="w-5 h-5" />
-                    ) : null}
-                  </button>
-
-                  <button
                     onClick={() => handleUpdate("reviewed")}
                     disabled={isSaving || status === "reviewed"}
                     className={`w-full p-5 rounded-2xl border-2 flex items-center justify-between font-bold transition-all ${status === "reviewed" ? "bg-blue-50 border-blue-500 text-blue-700" : "bg-white border-gray-100 text-gray-600 hover:border-blue-200 hover:bg-blue-50/30"}`}
                   >
                     Mark as Reviewed
                     {status === "reviewed" ? <Eye className="w-5 h-5" /> : null}
-                  </button>
-
-                  <button
-                    onClick={() => handleUpdate("rejected")}
-                    disabled={isSaving || status === "rejected"}
-                    className={`w-full p-5 rounded-2xl border-2 flex items-center justify-between font-bold transition-all ${status === "rejected" ? "bg-red-50 border-red-500 text-red-700" : "bg-white border-gray-100 text-gray-600 hover:border-red-200 hover:bg-red-50/30"}`}
-                  >
-                    Reject Candidate
-                    {status === "rejected" ? (
-                      <XCircle className="w-5 h-5" />
-                    ) : null}
                   </button>
                 </div>
 
@@ -418,8 +378,6 @@ const InternshipApplicationDetail = () => {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 };

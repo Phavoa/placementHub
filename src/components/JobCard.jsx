@@ -18,7 +18,7 @@ const JobCard = ({ job }) => {
 
   return (
     <div
-      onClick={() => navigate(`/jobs/${job.id}`)}
+      onClick={() => navigate(`/internships/${job.id}`)}
       className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col h-full group cursor-pointer relative overflow-hidden hover:-translate-y-1"
     >
       {/* Hover Gradient Border Effect */}

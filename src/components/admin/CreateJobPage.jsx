@@ -5,7 +5,7 @@ import JobHeaderFormSection from "./JobHeaderFormSection";
 import RichTextSection from "./RichTextSection";
 import DynamicListSection from "./DynamicListSection";
 import MetadataPanel from "./MetadataPanel";
-import Navbar from "../Navbar";
+import AdminNavbar from "./AdminNavbar";
 import api from "../../utils/api";
 
 const CreateJobPage = () => {
@@ -14,7 +14,7 @@ const CreateJobPage = () => {
     title: "",
     companyName: "",
     location: "Lagos, Nigeria",
-    type: "Full Time",
+    type: "Internship",
     experienceLevel: "Mid Level",
     salary: "",
     overview: "",
@@ -91,14 +91,14 @@ const CreateJobPage = () => {
       const response = await api.post("/jobs", payload);
 
       if (response.status === 201) {
-        alert("Job Published Successfully!");
+        alert("Internship Published Successfully!");
         localStorage.removeItem("jobDraft");
-        navigate("/jobs"); // Or wherever you want to redirect
+        navigate("/internships"); // Or wherever you want to redirect
       }
     } catch (err) {
-      console.error("Failed to publish job:", err);
-      setError(err.response?.data?.error || "Failed to publish job");
-      alert(err.response?.data?.error || "Failed to publish job");
+      console.error("Failed to publish internship:", err);
+      setError(err.response?.data?.error || "Failed to publish internship");
+      alert(err.response?.data?.error || "Failed to publish internship");
     } finally {
       setIsSubmitting(false);
     }
@@ -113,38 +113,38 @@ const CreateJobPage = () => {
   };
 
   const handlePreview = () => {
-    navigate("/jobs/preview", { state: { jobData: formData } });
+    navigate("/internships/preview", { state: { jobData: formData } });
   };
 
   return (
-    <div className="font-['Outfit'] bg-[#F9FAFB] min-h-screen pb-32">
-      <Navbar />
+    <div className="font-['Outfit'] bg-[#F9FAFB] min-h-screen pb-24 md:pb-32">
+      <AdminNavbar />
       {/* 1. Page Header */}
-      <div className="pt-28 pb-12 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-start justify-between">
+      <div className="pt-24 md:pt-28 pb-8 md:pb-12 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 md:gap-0">
             <div>
               <Link
-                to="/jobs"
-                className="inline-flex items-center gap-2 text-gray-500 hover:text-[#2d1b4e] transition-colors font-medium mb-4 group"
+                to="/admin/internship"
+                className="inline-flex items-center gap-2 text-gray-500 hover:text-[#2d1b4e] transition-colors font-medium mb-3 md:mb-4 group text-sm md:text-base"
               >
-                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />{" "}
-                Back to Job Listing
+                <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 group-hover:-translate-x-1 transition-transform" />{" "}
+                Back to Dashboard
               </Link>
-              <h1 className="text-4xl font-bold text-[#2d1b4e] mb-2">
-                Create New Job
+              <h1 className="text-3xl md:text-4xl font-bold text-[#2d1b4e] mb-2">
+                Create New Internship
               </h1>
-              <p className="text-lg text-gray-500">
-                Craft a premium job listing for the marketplace.
+              <p className="text-base md:text-lg text-gray-500">
+                Craft a premium internship listing for the marketplace.
               </p>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex w-full md:w-auto">
               <button
                 onClick={handlePreview}
-                className="flex items-center gap-2 text-gray-500 font-bold px-6 py-3 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all"
+                className="flex flex-1 md:flex-none justify-center items-center gap-2 text-gray-500 font-bold px-6 py-3.5 md:py-3 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all text-sm md:text-base"
               >
-                <Eye className="w-5 h-5" /> Preview
+                <Eye className="w-4 h-4 md:w-5 md:h-5" /> Preview
               </button>
             </div>
           </div>
@@ -152,23 +152,23 @@ const CreateJobPage = () => {
       </div>
 
       {/* 2. Main Layout */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* LEFT COLUMN (Forms) - 70% ish */}
-          <div className="lg:col-span-8 space-y-10">
+          <div className="lg:col-span-8 space-y-8 md:space-y-10">
             {/* Section 1: Header Info */}
             <JobHeaderFormSection
               formData={formData}
               handleChange={handleChange}
             />
 
-            {/* Section 2: Job Overview */}
+            {/* Section 2: Internship Overview */}
             <RichTextSection
-              title="Job Overview"
+              title="Internship Overview"
               name="overview"
               value={formData.overview}
               handleChange={handleChange}
-              placeholder="Describe the role and its impact..."
+              placeholder="Describe the internship role and its impact..."
             />
 
             {/* Section 3: Responsibilities */}

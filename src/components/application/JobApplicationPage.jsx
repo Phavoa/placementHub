@@ -113,7 +113,7 @@ const JobApplicationPage = () => {
               received your application and will review it shortly.
             </p>
             <Link
-              to="/jobs"
+              to="/internships"
               className="inline-block bg-[#ffc12b] text-[#2d1b4e] font-bold px-8 py-3 rounded-full hover:bg-[#ffcd57] transition-all shadow-md"
             >
               Browse More Jobs

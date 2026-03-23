@@ -85,7 +85,7 @@ const StickyApplyCard = ({
             to={
               job.type === "Internship"
                 ? `/internship-application`
-                : `/jobs/${job._id || job.id}/apply`
+                : `/internships/${job._id || job.id}/apply`
             }
             state={{ jobData: applicationJobData || job }}
             className="w-full bg-[#ffc12b] text-[#2d1b4e] font-bold py-4 rounded-xl hover:bg-[#ffcd57] transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-1 group relative overflow-hidden"

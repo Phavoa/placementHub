@@ -32,7 +32,7 @@ const JobListPage = () => {
       if (typeFilter) params.append("type", typeFilter);
       if (sortOption) params.append("sort", sortOption);
 
-      const response = await api.get(`/jobs?${params.toString()}`);
+      const response = await api.get(`jobs?${params.toString()}`);
       setJobs(response.data);
     } catch (err) {
       console.error("Failed to fetch jobs:", err);
@@ -58,7 +58,7 @@ const JobListPage = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await api.get("/jobs?status=Published&sort=newest");
+      const response = await api.get("jobs?status=Published&sort=newest");
       setJobs(response.data);
     } catch (err) {
       console.error("Failed to fetch jobs:", err);
@@ -216,9 +216,14 @@ const JobListPage = () => {
               Join our talent network and get notified when new opportunities
               that match your profile become available.
             </p>
-            <button className="bg-[#ffc12b] text-[#2d1b4e] px-12 py-4 rounded-full font-bold text-lg hover:bg-yellow-400 shadow-xl transition-transform hover:scale-105">
+            <a
+              href="https://chat.whatsapp.com/LTwcRS7AjKC9XFVXS3eDVg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#ffc12b] text-[#2d1b4e] px-12 py-4 rounded-full font-bold text-lg hover:bg-yellow-400 shadow-xl transition-transform hover:scale-105 inline-block"
+            >
               Join Talent Network
-            </button>
+            </a>
           </div>
           {/* Shapes */}
           <div className="absolute top-0 left-0 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-[100px] opacity-40"></div>

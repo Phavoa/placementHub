@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import Logo from "../assets/placehub_logo.png";
 import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Internships", href: "/jobs" },
-
-    { name: "Training", href: "/training" },
-    { name: "About", href: "/about" },
+    { name: "Internships", href: "/internships" },
+    { name: "CAP", href: "#" },
+    { name: "SIWES", href: "#" },
+    { name: "Employer Portal", href: "#" },
   ];
 
   return (
@@ -40,15 +41,19 @@ const Navbar = () => {
 
           {/* Desktop Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button className="bg-[#3E1D67] hover:bg-[#2a1345] text-white rounded-xl px-8 py-6 text-base font-semibold shadow-sm transition-transform hover:scale-105">
-              <a href="/internship-application">Apply</a>
-            </Button>
-            <Button
-              variant="outline"
-              className="border-[1.5px] border-[#3E1D67] text-[#3E1D67] hover:bg-purple-50 rounded-xl px-6 py-6 text-base font-bold transition-transform hover:scale-105"
-            >
-              <a href="/contact">Contact Us</a>
-            </Button>
+            <Link to="/internship-application">
+              <Button className="bg-[#3E1D67] hover:bg-[#2a1345] text-white rounded-xl px-8 py-6 text-base font-semibold shadow-sm transition-transform hover:scale-105">
+                Apply
+              </Button>
+            </Link>
+            <Link to="/contact">
+              <Button
+                variant="outline"
+                className="border-[1.5px] border-[#3E1D67] text-[#3E1D67] hover:bg-purple-50 rounded-xl px-6 py-6 text-base font-bold transition-transform hover:scale-105"
+              >
+                Contact Us
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}

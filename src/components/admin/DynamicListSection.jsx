@@ -10,13 +10,13 @@ const DynamicListSection = ({
   placeholder,
 }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-8">
       <div className="flex items-center justify-between mb-6 border-b border-gray-100 pb-4">
-        <div className="flex items-center gap-3">
-          <div className="bg-[#2d1b4e]/5 p-2 rounded-lg">
-            <List className="w-5 h-5 text-[#2d1b4e]" />
+        <div className="flex items-center gap-2 md:gap-3">
+          <div className="bg-[#2d1b4e]/5 p-1.5 md:p-2 rounded-lg">
+            <List className="w-4 h-4 md:w-5 md:h-5 text-[#2d1b4e]" />
           </div>
-          <h3 className="text-xl font-bold text-[#2d1b4e]">{title}</h3>
+          <h3 className="text-lg md:text-xl font-bold text-[#2d1b4e]">{title}</h3>
         </div>
         <span className="text-sm font-medium text-gray-400">
           {items.length} items

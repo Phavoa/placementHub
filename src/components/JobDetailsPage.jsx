@@ -39,7 +39,7 @@ const JobDetailsPage = () => {
         return;
       }
       try {
-        const response = await api.get(`/jobs/${id}`);
+        const response = await api.get(`jobs/${id}`);
         setJob(response.data);
       } catch (err) {
         console.error("Failed to fetch job details:", err);
@@ -116,7 +116,7 @@ const JobDetailsPage = () => {
               "The job you are looking for does not exist or has been removed."}
           </p>
           <Link
-            to="/jobs"
+            to="/internships"
             className="bg-[#2d1b4e] text-white px-8 py-3 rounded-full font-bold hover:bg-purple-900 transition-colors"
           >
             Browse All Jobs
@@ -158,7 +158,7 @@ const JobDetailsPage = () => {
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="mb-8">
             <Link
-              to="/jobs"
+              to="/internships"
               className="inline-flex items-center gap-2 text-gray-500 hover:text-[#2d1b4e] transition-colors font-medium group"
             >
               <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />{" "}
@@ -233,7 +233,7 @@ const JobDetailsPage = () => {
                 to={
                   safeJob.type === "Internship"
                     ? `/internship-application`
-                    : `/jobs/${id}/apply`
+                    : `/internships/${id}/apply`
                 }
                 state={{ jobData: serializableJob }}
                 className="flex-1 lg:flex-none bg-[#ffc12b] text-[#2d1b4e] px-8 py-3 rounded-full font-bold hover:bg-[#ffcd57] transition-all shadow-lg hover:-translate-y-1 hover:shadow-xl text-lg flex items-center justify-center text-center"
@@ -311,7 +311,7 @@ const JobDetailsPage = () => {
               to={
                 safeJob.type === "Internship"
                   ? `/internship-application`
-                  : `/jobs/${safeJob._id || safeJob.id || id}/apply`
+                  : `/internships/${safeJob._id || safeJob.id || id}/apply`
               }
               state={{ jobData: serializableJob }}
               className="inline-block bg-[#ffc12b] text-[#2d1b4e] px-12 py-5 rounded-full font-bold text-xl hover:bg-[#ffcd57] transition-all shadow-xl hover:scale-105 hover:shadow-2xl"

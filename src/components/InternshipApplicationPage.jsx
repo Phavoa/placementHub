@@ -159,10 +159,10 @@ const InternshipApplicationPage = () => {
     <div className="font-['Outfit'] bg-gray-50 min-h-screen flex flex-col">
       <Navbar />
 
-      <main className="grow pt-32 pb-24 px-4">
+      <main className="grow md:pt-32 pt-10 pb-24 px-4">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div className="mb-12 text-center">
+          <div className="mb-12 md:text-center">
             <Link
               to="/"
               className="inline-flex items-center gap-2 text-gray-500 hover:text-[#2d1b4e] transition-colors mb-6 font-medium group"
