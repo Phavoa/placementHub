@@ -63,16 +63,59 @@ function AboutVideo() {
               </div>
             </div>
 
-            <div>
-              <p className="content-text">
-                According to the research of Daniels, we have discovered that
-                most people struggle with achieving their goals due to lack of
-                proper guidance and structured approach to learning.
+            <div className="space-y-6">
+              <p className="content-text text-lg leading-relaxed text-gray-700">
+                Placement Hub is a recruitment agency with an internal
+                internship academy dedicated to bridging the gap between talent
+                and opportunity in today’s competitive job market. We understand
+                that while many individuals possess the passion and willingness
+                to work, they may not yet have the in-demand skills employers
+                require. At the same time, organizations are constantly seeking
+                competent, job-ready professionals who can deliver value from
+                day one. This is where Placement Hub stands out. We go beyond
+                the traditional role of recruitment by not only sourcing and
+                placing candidates but also intentionally developing them to
+                meet industry standards. Our approach is centered on creating a
+                seamless connection between employers and highly capable
+                candidates, ensuring long-term success for both parties.
               </p>
-              <p className="content-text">
-                Our comprehensive program combines theoretical knowledge with
-                practical application, ensuring that participants not only learn
-                but also implement what they've learned in real-world scenarios.
+              <p className="content-text text-lg leading-relaxed text-gray-700">
+                Placement Hub is committed to excellence, integrity, and impact.
+                We partner with organizations across various industries to
+                understand their workforce needs and deliver candidates who are
+                not only qualified but also aligned with their business goals
+                and culture. For job seekers, we provide more than just
+                employment opportunities; we offer a pathway to growth,
+                self-development, and long-term career success. Our dual
+                approach to recruitment and internship enables us to
+                consistently deliver value, ensuring businesses gain access to
+                skilled talent while candidates are empowered to unlock their
+                full potential.
+              </p>
+              <p className="content-text text-lg leading-relaxed text-gray-700">
+                At the core of our operations is our internal internship
+                academy, a strategic initiative that equips prospective
+                candidates with the practical knowledge, technical expertise,
+                and professional competencies needed to thrive in the workplace.
+                Through our Career Acceleration Program, individuals who may not
+                initially meet job requirements can receive structured
+                internship tailored to current market demands. This program
+                focuses on hands-on learning, real-world applications, and
+                industry-relevant skills that enhance employability and boost
+                confidence. We believe that talent can be nurtured, and with the
+                right guidance and exposure, individuals can evolve into
+                top-performing professionals.
+              </p>
+              <p className="content-text text-lg leading-relaxed text-gray-700">
+                As the world of work continues to evolve, Placement Hub remains
+                dedicated to staying ahead by continuously adapting our
+                internship programs and recruitment strategies to meet emerging
+                trends and industry demands. We are driven by a vision to shape
+                the future of work by raising a generation of skilled,
+                competent, and confident professionals who are ready to make
+                meaningful contributions in any organization. At Placement Hub,
+                we are not just filling vacancies; we are building careers,
+                transforming lives, and strengthening businesses.
               </p>
             </div>
           </div>

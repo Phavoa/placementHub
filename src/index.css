@@ -1137,6 +1137,13 @@ nav {
   align-items: center;
 }
 
+@media (max-width: 1024px) {
+  .video-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
 .video-card {
   background: linear-gradient(135deg, #ec4899 0%, #ef4444 100%);
   border-radius: 20px;
@@ -2158,4 +2165,29 @@ select.error {
 
 .animate-shine {
   animation: shine 1s;
+}
+
+/* Premium UI Animations */
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 10s ease-in-out infinite;
 }

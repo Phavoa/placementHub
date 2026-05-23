@@ -36,10 +36,10 @@ function Services() {
               />
             </svg>
 
-            <h3>Trainings</h3>
+            <h3>Internship</h3>
             <p>
               Unlock new career opportunities in the tech industry with
-              Placement-Hub's specialized courses.
+              Placement-Hub's specialized internship programs.
             </p>
           </div>
 

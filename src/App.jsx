@@ -16,6 +16,9 @@ import PartnershipContact from "./components/PartnershipContact";
 import InternshipDashboard from "./components/InternshipDashboard";
 import InternshipApplicationDetail from "./components/InternshipApplicationDetail";
 import InternshipProgramManager from "./components/InternshipProgramManager";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import TermsOfService from "./components/TermsOfService";
+import CAP from "./components/CAP";
 
 function App() {
   return (
@@ -23,6 +26,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<RemoteInternship />} />
+          <Route path="/cap" element={<CAP />} />
           <Route path="/training" element={<Training />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/programs" element={<Courses />} />
@@ -51,6 +55,8 @@ function App() {
             element={<InternshipProgramManager />}
           />
           <Route path="/cybersecuritysignup" element={<CyberLandingPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
         </Routes>
       </Router>
     </>

@@ -41,17 +41,7 @@ const Footer = () => {
             </li>
             <li>
               <a href="/internships" className="hover:text-[#2d1b4e]">
-                Careers
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" className="hover:text-[#2d1b4e]">
-                Blog
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" className="hover:text-[#2d1b4e]">
-                Pricing
+                Internship
               </a>
             </li>
           </ul>
@@ -61,24 +51,14 @@ const Footer = () => {
           <h4 className="font-bold text-[#2d1b4e] mb-6 text-lg">Legal</h4>
           <ul className="space-y-4 text-gray-600">
             <li>
-              <a href="javascript:void(0)" className="hover:text-[#2d1b4e]">
+              <Link to="/privacy-policy" className="hover:text-[#2d1b4e]">
                 Privacy Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="javascript:void(0)" className="hover:text-[#2d1b4e]">
+              <Link to="/terms-of-service" className="hover:text-[#2d1b4e]">
                 Terms of Service
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" className="hover:text-[#2d1b4e]">
-                Cookie Policy
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" className="hover:text-[#2d1b4e]">
-                GDPR
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
